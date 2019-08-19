@@ -59,7 +59,7 @@ class MY_Model extends CI_Model {
 			// $msg = $this->load->view( 'forgot.php', $data, true );
 			$this->load->library('email', config_item('email_config'));
 			$this->email->set_newline("\r\n");
-			$this->email->from('Lansweeper@leicabiosystems.com'); // change it to yours
+			$this->email->from('nap.support@bluenettech.com'); // change it to yours
 			$this->email->to( $to );// change it to yours rahul.deo@talentserv.co.in
 			$this->email->subject( $email_template->{EMAIL_TEMPLATE_SUBJECT} );
 
@@ -157,8 +157,9 @@ class MY_Model extends CI_Model {
 	
 	public function do_upload($userfile,$upload_path,$rename_file=0)
     {
+//            echo $upload_path;exit;
         $config['upload_path']          = $upload_path;
-        $config['allowed_types']        = 'pdf';
+        $config['allowed_types']        = 'jpg|pdf|jpeg|png';
         $config['max_size']             = 0;
         //$config['max_width']            = 1024;
         //$config['max_height']           = 768;

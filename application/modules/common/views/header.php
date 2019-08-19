@@ -124,11 +124,15 @@
                         </li>-->
  						<li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <img alt="" class="img-circle " src="<?php echo base_url('assets/img/prof.png'); ?>">
+                                <?php if ( ! empty($this->session->userdata('profile_pic')) ) : ?>
+                                    <img alt="" class="img-circle " src="<?php echo base_url( 'assets/profileimages/'.$this->session->userdata('profile_pic') ); ?>">
+                                <?php else : ?>
+                                    <img alt="" class="img-circle " src="<?php echo base_url( 'assets/img/prof.png' ); ?>">
+                                <?php endif; ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
-                                    <a href="#">
+                                    <a href="<?php echo base_url('my_account'); ?>">
                                         <i class="fa fa-user"></i> My Account </a>
                                 </li>
                                 <li>
@@ -165,7 +169,19 @@
 	                        <li class="sidebar-user-panel">
 	                            <div class="user-panel">
 	                                <div class="pull-left image">
-	                                    <img src="<?php echo base_url('assets/img/prof.png'); ?>" class="img-circle user-img-circle" alt="User Image">
+	                                    <?php if(!empty($this->session->userdata('profile_pic'))) : ?>
+                                        <style type="text/css">
+                                            .image {
+                                                background: url("<?php echo base_url( 'assets/profileimages/'.$this->session->userdata('profile_pic') ); ?>") center center no-repeat;
+                                                background-size: contain;
+                                                width: 75px;
+                                                height: 75px;
+                                            }
+                                        </style>
+                                            &nbsp;
+                                        <?php else : ?>
+                                           <img src="<?php echo base_url( 'assets/img/prof.png' ); ?>" class="img-circle user-img-circle" alt="User Image"> 
+                                        <?php endif; ?>
 	                                </div>
 	                                <div class="pull-left info">
 	                                    <p>

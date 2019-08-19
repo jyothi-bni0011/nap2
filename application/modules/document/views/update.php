@@ -68,7 +68,7 @@
 						<select class="form-control input-height" name="form_steps" id="status">
 							
                            	<option value="1" <?php if($document->form_steps == 1) echo 'selected'; ?>>1 Step Form</option>
-                           	<option value="2" <?php if($document->form_steps == 2) echo 'selected'; ?>>2 Step Form</option>
+                           	<!--<option value="2" <?php // if($document->form_steps == 2) echo 'selected'; ?>>2 Step Form</option>-->
                         </select>
                         <div id="doc_steps">
                         <?php if ( ! empty( $form_steps ) ) : foreach ($form_steps as $key => $form_step) : ?> 
@@ -151,8 +151,19 @@
 							<div class="card-header bg-danger"><span class="card-title">Available variables</span></div>
 							<ul class="list-group" id="available-variable">
 								<?php if( ! empty($variables) ): foreach ($variables as $variable): ?>
-								<a href="javascript:return false;" class="active-variable list-group-item list-group-item-action border-0" data-field_name="<?php echo $variable->field_name; ?>" data-varname="<?php echo $variable->varname; ?>">
-									<?php echo $variable->varname; ?><span class="badge badge-primary badge-pill"><?php echo $variable->role_name; ?></span>
+								<a href="javascript:return false;" class="active-variable list-group-item list-group-item-action border-0" data-field_name="<?php echo $variable->field_name; ?>" data-varname="<?php echo $variable->varname; ?>" data-type="<?php echo $variable->type_id; ?>">
+                                                                        <?php echo $variable->varname; ?><span class="badge badge-primary badge-pill"><?php echo $variable->role_name; ?></span>
+                                        
+                                                                        <?php if($variable->type_id==1){ ?>
+                                                                            <span class="badge badge-danger badge-pill"><?php echo "Radio"; ?></span>
+                                                                        <?php }?>
+                                                                        <?php if($variable->type_id==0){ ?>
+                                                                        <span class="badge badge-danger badge-pill"><?php echo "Text"; ?></span>
+                                                                        <?php }?>
+                                                                         <?php if($variable->type_id==2){ ?>
+                                                                        <span class="badge badge-danger badge-pill"><?php echo "File"; ?></span>
+                                                                        <?php }?>
+                                                                        
 								</a>
 								<?php endforeach; endif; ?>
 								<a href="javascript:return false;" id="var_create" class="list-group-item list-group-item-action border-0">Create / Manage Variables</a>
@@ -204,6 +215,14 @@
 						<?php foreach($roless as $role):?>
 							<option value="<?= $role->{ROLE_ID}; ?>"><?= $role->{ROLE_NAME}; ?></option>
 						<?php endforeach; ?>
+					</select>
+				</div>
+                                <div class="form-group feild_radio">
+					<label for="" class="small">Select Type</label>
+					<select name="type_id" class="form-control" id="type_id">
+                                             <option value="0">Text</option>
+                                            <option value="1">Radio</option>
+                                            <option value="2">File</option>
 					</select>
 				</div>
 			</div>

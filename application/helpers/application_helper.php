@@ -56,3 +56,23 @@ if ( ! function_exists('success_message'))
 		return sprintf('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>%s</div>', $message);
 	}
 }
+
+function search_revisions($dataArray, $search_value, $key_to_search, $other_matching_value = null, $other_matching_key = null) {
+    // This function will search the revisions for a certain value
+    // related to the associative key you are looking for.
+    $keys = array();
+    foreach ($dataArray as $key => $cur_value) {
+        if ($cur_value[$key_to_search] == $search_value) {
+            if (isset($other_matching_key) && isset($other_matching_value)) {
+                if ($cur_value[$other_matching_key] == $other_matching_value) {
+                    $keys[] = $key;
+                }
+            } else {
+                // I must keep in mind that some searches may have multiple
+                // matches and others would not, so leave it open with no continues.
+                $keys[] = $key;
+            }
+        }
+    }
+    return $keys;
+}

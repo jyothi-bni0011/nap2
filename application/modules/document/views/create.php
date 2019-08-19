@@ -67,7 +67,7 @@
 						<select class="form-control input-height" name="form_steps" id="form_steps">
                            
                            <option value="1">1 Step Form</option>
-                           <option value="2">2 Step Form</option>
+                           <!--<option value="2">2 Step Form</option>-->
                         </select> 
 						<div id="doc_steps">
                         	Form Step 1 : New Associate <br>

@@ -22,6 +22,7 @@
 							<tr>
 								<th>Sr No</th>
 								<th width="50%">Document/Form</th>
+                                                                <th>Document Category</th>
 								<th>Status</th>
 								<th>Document</th>
 							</tr>
@@ -39,6 +40,7 @@
 										<?php echo $associate_doc->document_title; ?>
 									<?php endif; ?>
 								</td>
+                                                                <td><?php echo $associate_doc->doc_category_name;?></td>
 								<td>
 									<?php if( array_key_exists($associate_doc->status, $document_statuses) ): ?>
 										<?php echo $document_statuses[$associate_doc->status]; ?>

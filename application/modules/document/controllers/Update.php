@@ -15,6 +15,7 @@ class Update extends MY_Controller {
 
 	public function index( $document_id )
 	{
+            
 		$this->data['title'] = "Document";
 		if( count($_POST) ) 
 		{ 
@@ -60,15 +61,19 @@ class Update extends MY_Controller {
 
 				if( ! empty($_POST['variables']) AND count($_POST['variables']) ) 
 				{
+//                                    print_r($this->input->post('variables'));exit;
 					foreach ($this->input->post('variables') as $value) {
 					
 						$this->variable_model->create(
 							$value['field_name'], 
 							$value['varname'], 
 							$this->input->post('document_id'), 
-							$value['role_id'] 
+							$value['role_id'],
+                                                        $value['type_id'] 
 						);
+                                                
 					}
+                                        
 				}
 
 				if( ! empty( $_POST['form_steps_role'] ) && 

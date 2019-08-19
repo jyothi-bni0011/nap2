@@ -24,6 +24,8 @@ $(document).ready(function(){
 	
 	$(document).on('click', '#var_create', function(event) {
 		event.preventDefault();
+                $('.feild_radio').show();
+                $('#var_create_modal').find('.modal-title').text('Available Variables');
 		$('#var_create_modal').modal("show");
 	});
 
@@ -39,7 +41,7 @@ $(document).ready(function(){
 			
 		$('#signature_modal').modal("show");
 	});
-	
+        
 	$('input[name="field_name"]').on("keyup", function() {
 		var text = $(this).val(),
  			varname = text.toLowerCase().replace(/[_\W]+/g, "_");
@@ -50,19 +52,23 @@ $(document).ready(function(){
 	$('#var_create_modal').on("submit", function(event) {
 		
 		event.preventDefault();
-		var data 			= $(this).serialize(),
+		var     data 			= $(this).serialize(),
 			field_name 		= $(this).find('input[name="field_name"]').val(),
 			varname 		= $(this).find('input[name="varname"]').val(),
 			role_id			= $(this).find('select[name="role_id"] option:selected').val(),
+                        type_id			= $(this).find('select[name="type_id"] option:selected').val(),
+                        type_name			= $(this).find('select[name="type_id"] option:selected').text(),
 			role_name		= $(this).find('select[name="role_id"] option:selected').text(),
 			key 			= varname.replace('{', '').replace('}', '');
-
+                        
+                       
 			input_hidden 	= 
 				'<input type="hidden" name="variables[' + key + '][field_name]" value="' + field_name + '">' +
 				'<input type="hidden" name="variables[' + key + '][varname]" value="' + varname + '">' +
-				'<input type="hidden" name="variables[' + key + '][role_id]" value="' + role_id + '">',
+				'<input type="hidden" name="variables[' + key + '][role_id]" value="' + role_id + '">' +
+                                '<input type="hidden" name="variables[' + key + '][type_id]" value="' + type_id + '">',
 			
-			variable 		= '<a href="javascript:return false;" class="active-variable justify-content-between list-group-item list-group-item-action border-0" data-field_name="' + field_name + '" data-varname="' + varname + '">' + varname + '<span class="badge badge-primary badge-pill">' + role_name + '</span></a>';
+			variable 		= '<a href="javascript:return false;" class="active-variable justify-content-between list-group-item list-group-item-action border-0" data-field_name="' + field_name + '" data-varname="' + varname + '" data-type="' + type_id + '">' + varname + '<span class="badge badge-primary badge-pill">' + role_name + '</span><span class="badge badge-danger badge-pill">' + type_name + '</span></a>';
 
 		$('.no-variable').hide();
 		$('#create-template').prepend(input_hidden);
@@ -73,34 +79,40 @@ $(document).ready(function(){
 
 	});
 
-	$(document).on('keyup', '.update-changes', function(event) {
+	$(document).on('keyup', 'input[type="text"]', function(event) {
 		
-		var varname = $(this).attr('name'),
+		var varname = $(this).attr('id'),
 			value = $(this).val();
-		
-		if( value.length > 0 ) {
 			$("." + varname).text(value);
-		}
 	});
-
-	$(document).on('focus', '.update-changes', function(event) {
-		var varname = $(this).attr('name');
+        $(document).on('click', 'input[type="radio"]', function(event) {
+               
+		var varname = $(this).attr('id');
+                $("#done").remove();
+		$("." + varname).append('<i class="material-icons" id="done" style="font-size: 15px;">done</i> ');
+	});
+	$(document).on('focus', 'input[type="text"]', function(event) {
+		var varname = $(this).attr('id');
 		$("." + varname).addClass('highlight');
 	});
 
-	$(document).on('blur', '.update-changes', function(event) {
-		var varname = $(this).attr('name');
+	$(document).on('blur', 'input[type="text"]', function(event) {
+		var varname = $(this).attr('id');
 		$("." + varname).removeClass('highlight');
 	});
 
 	$(document).on('click', '.active-variable', function(event) {
 		event.preventDefault();
-		
 		var field_name	= $(this).data("field_name"),
  			varname 	= $(this).data("varname"),
- 			key 		= varname.replace('{', '').replace('}', ''),
- 			append 		= varname;
-
+ 			key 		= varname.replace('{', '').replace('}', '');
+ 			
+                if($(this).data("type")==1){
+                  append = varname;  
+                }else{
+                   append = varname; 
+                }
+                console.log(append);
 		tinymce.activeEditor.execCommand('mceReplaceContent', false, append);
 	});
 
@@ -111,7 +123,8 @@ $(document).ready(function(){
  			varname 	= $(this).data("varname"),
  			key 		= varname.replace('{', '').replace('}', ''),
  			append 		= varname;
-
+                $('.feild_radio').hide();
+ 		$('#var_create_modal').find('.modal-title').text('System Variables');
  		$('#var_create_modal').find('input[name="field_name"]').val(field_name);
  		$('#var_create_modal').find('input[name="varname"]').val(varname);
  		$('#var_create_modal').find('input[name="modal_type"]').val('system');
@@ -143,6 +156,7 @@ $(document).ready(function(){
 	// Rearrange Available variables according to template variable entries
 	var variables_pos 		= $('.generate-document [class*="var_"]');
 	console.log(variables_pos);
+        console.log('end');
 	if( variables_pos.length ) {
 
 		var generate_variables 	= $('.generate-variable .form-group'),
@@ -155,7 +169,8 @@ $(document).ready(function(){
 
 			if( $.inArray(_class, classes) === -1 ) {
 
-				var form_group 	= generate_variables.find('[name="' + _class + '"]');
+				var form_group 	= generate_variables.find('[id="' + _class + '"]');
+                                console.log(form_group);
 				if( form_group.length ) 
 				{
 					class_names 	 = form_group.closest('.form-group').attr('class');
@@ -174,11 +189,12 @@ $(document).ready(function(){
 		//	}
 		//});
 
-		$('.generate-variable').html(rearrage);
+//		$('.generate-variable').html(rearrage);
 	}
 
 	if( typeof SignaturePad !== 'undefined' )
 	{
+                // signature related code
 		var saveButton 		= document.getElementById('save_signature');
 		var clearButton 	= document.getElementById('clear_signature');
 		var uploadButton 	= document.getElementById('upload_signature');
@@ -194,7 +210,7 @@ $(document).ready(function(){
 			$('#signature_modal').modal("hide");
 
 			var signature_var = $('#signature_modal').find('input[name="signature_var"]').val();
-			$('.generate-document .' + signature_var ).after('<span class="' + signature_var + '"><img src="' + data + '" width="125" /></span>').remove();
+			$('.generate-document .' + signature_var ).after('<span class="' + signature_var + '"><img class="img-responsive" src="' + data + '" /></span>').remove();
 			$('form input[name="' + signature_var + '"]').val(data);
 		});
 
@@ -220,7 +236,7 @@ $(document).ready(function(){
 			}
 		});
 	}
-
+       
 	var $form_steps_modal = $('#form_steps_modal');
 	$('select[name="form_steps"]').on("change", function() {
 		if ( $(this).val() == 2 ) 

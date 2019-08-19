@@ -57,7 +57,7 @@ class Document_update_model extends MY_Model {
 		if ( $except_role ) {
 			$this->db->where('document_variables.role_id <>', $except_role);	
 		}
-
+                $this->db->order_by('variable_id','DESC');
 		$result = $this->db->get();
 		if( $result->num_rows() ) {
 			return $result->result();

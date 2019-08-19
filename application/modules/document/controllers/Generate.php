@@ -20,7 +20,7 @@ class Generate extends MY_Controller {
 		$this->__dirs_checks();
 
 	}
-
+ 
 	public function index( $document_id=0, $associate_id=0 )
 	{
 
@@ -66,18 +66,26 @@ class Generate extends MY_Controller {
 			$variables 	= $this->document_update_model->getVariables( $document_id, (int)$this->session->userdata('role_id') );
 			$this->data['document']		= $document;
 			$this->data['variables']	= $variables;
-
+                        
 			$variables_ = $this->document_update_model->getVariables( $document_id, 0,(int)$this->session->userdata('role_id') );
 
 			// Converting variables in HTML format, so it can be referrenced by jquery Highlighting Feature
 			$template = $document->document_template;
 			if( isset($variables) AND count($variables) ) {
 				foreach ($variables as $variable) {
-				
-					$replace 		= sprintf('<span class="var_%s">%s</span>', str_replace(['{','}'], "", $variable->varname), $variable->varname);
-
+                                        if($variable->type_id==1){
+                                        $replace = sprintf('<span class="var_%s">%s</span>', str_replace(['{','}'], "", $variable->varname), $variable->field_name);
+                                        }
+                                        else{
+                                        $replace = sprintf('<span class="var_%s">%s</span>', str_replace(['{','}'], "", $variable->varname), $variable->varname);
+                                        }
 					if( in_array($variable->varname, $signature_variables) ) {
+                                            if($variable->type_id==1){
+						$replace 	= sprintf('<span class="var_%s">%s</span>', str_replace(['{','}'], "", $variable->varname), $variable->field_name);
+                                        }
+                                        else{
 						$replace 	= sprintf('<span class="var_%s">%s</span>', str_replace(['{','}'], "", $variable->varname), $variable->varname);
+                                        }
 					}
 
 					$template = str_replace($variable->varname, $replace, $template);
@@ -100,7 +108,8 @@ class Generate extends MY_Controller {
 
 			// Replacing with the existing values from users_documents_fields
 			$document_values = $this->document_update_model->get_document_values( $document_id, $associate_id );
-			if( $document_values ) 
+//			print_r($document_values);exit;
+                        if( $document_values ) 
 			{
 				foreach ($document_values as $document_value) {
 					
@@ -108,13 +117,13 @@ class Generate extends MY_Controller {
 					$replace 		= sprintf('<span class="var_%s">%s</span>', str_replace(['{','}'], "", $document_value->varname), $document_value->varname_value);
 					$template 		= str_replace($document_value->varname, $replace, $template);
 
-					if( in_array($document_value->varname, $signature_variables) ) {
+					if( in_array($document_value->varname, $signature_variables) || $document_value->varname== "{voided_check_attachment}" ) {
 
 						$signature_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
 
 						file_put_contents($signature_path, file_get_contents($document_value->varname_value));
 						$image 		= $this->image_dir . $document_id . $associate_id . $varname;
-						$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname), '<img class="' . $varname . '" src="' . base_url($image) . '" width="125" />', $template);
+						$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname), '<img class="' . $varname . ' img-responsive" src="' . base_url($image) . '"/>', $template);
 						
 					}
 				}
@@ -123,7 +132,16 @@ class Generate extends MY_Controller {
 			// If some data is posted, Patch the variables with posted data and regenerate the document
 			if( count($_POST) ) 
 			{
+//                            print_r($_POST);exit;
+                            $posted_data=[];
+                            $posted_data 	= $this->input->post(NULL, TRUE);
+                                if ( count($_FILES) && ! $_FILES['variable_file']['error'] ) {
+                                    
+                                    $file_name 		= url_title($associate_document->associate_username . '-' . $document->document_title . '-' . time(), 'dash', TRUE); 
 
+                                    $pdf_file = '.' . $this->pdf_dir . "variable_files" . '/';
+                                    $posted_data['variable_file'] = $this->document_update_model->do_upload( 'variable_file', $pdf_file , $file_name);
+                                }
 				$form_step = $this->document_update_model->get_form_steps( $document_id, $associate_document->form_step );
 				if( ! empty( $form_step ) 
 					&& ( $form_step->role_id !== $this->session->userdata('role_id') ) ) 
@@ -137,47 +155,90 @@ class Generate extends MY_Controller {
 					$pdf_path	= dirname( APPPATH ) . $associate_document->file_url;
 				}
 
-				$posted_data 	= $this->input->post(NULL, TRUE);
+				
+//                                print_r($posted_data);
+//                                print_r($variables);exit;
+                                $json  = json_encode($variables);
+                                $var_array = json_decode($json, true);
 				$users_document_fields			= [];
 				if( isset($variables) AND count($variables) ) 
 				{
+                                    if($variable->type_id==1){
+                                  $findKey = search_revisions($var_array,$posted_data['var_feild_radio'], 'varname');
+                                  $findKey=implode(',',$findKey);
+                                  $var_feild_radio_id=$var_array[$findKey]['variable_id'];
+                                  $var_feild_radio_varname=sprintf('var_%s', str_replace(['{','}'], "", $var_array[$findKey]['varname']));
+                                    }
 					foreach ($variables as $variable) 
 					{
-
+                                                if($variable->type_id==1){
+						$varname ="var_feild_radio";
+                                                $variable_id=$var_feild_radio_id;
+                                                }if($variable->type_id==0){
 						$varname = sprintf('var_%s', str_replace(['{','}'], "", $variable->varname));
-						if( array_key_exists($varname, $posted_data) && ! array_key_exists($varname, $signature_variables) ) {
-
+                                                $variable_id=$variable->variable_id;
+                                                }if($variable->type_id==2 && isset($pdf_file)){
+						$varname = sprintf('var_%s', str_replace(['{','}'], "", $variable->varname));
+                                                $variable_id=$variable->variable_id;
+                                                $image 		= base_url().$pdf_file . $posted_data['variable_file'];
+                                                }
+						if( array_key_exists($varname, $posted_data) && ! array_key_exists($varname, $signature_variables) && $variable->type_id !=2 ) {
 							$users_document_fields[$varname] 	= array(
 								'user_id'			=> $associate_id,
 								'document_id'		=> $document_id,
-								'variable_id'		=> $variable->variable_id,
+								'variable_id'		=> $variable_id,
 								'varname_value'		=> $posted_data[$varname],
 							);
-
-							$replace  		= ($posted_data[$varname])? $posted_data[$varname]:$variable->varname;
-							$template 		= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname), $replace, $template);
+                                                        
+//                                                       print_r($template);exit;
+                                                        
+                                                        $tick='(selected)';
+							$replace  		= ($posted_data[$varname])? ($variable->type_id==1)?$var_array[$findKey]['field_name'].' '.$tick:$posted_data[$varname] : $variable->varname;
+                                                        
+                                                        $where_text=sprintf('var_%s', str_replace(['{','}'], "", ($variable->type_id==1)?$var_array[$findKey]['varname']:$variable->varname));
+							$template 		= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $where_text), $replace, $template);
+//							$template 		= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $test), $replace, $template);
 						}
-
+                                                
 						if( array_key_exists($varname, $signature_variables) && 
-							( $posted_signature = $this->input->post($varname, FALSE) ) ) {
-
+							( $posted_signature = $this->input->post($varname, FALSE) )) {
+//                                                       
 							$users_document_fields[$varname] 	= array(
 								'user_id'			=> $associate_id,
 								'document_id'		=> $document_id,
 								'variable_id'		=> $variable->variable_id,
-								'varname_value'		=> $posted_signature,
-							);
+								'varname_value'		=> $posted_signature);
 
 							$signature_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
 
 							file_put_contents($signature_path, file_get_contents($posted_signature));
 							echo $image 		= $this->image_dir . $document_id . $associate_id . $varname;
-							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname), '<img class="' . $varname . '" src="' . base_url($image) . '" width="125" />', $template);
+							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname), '<img class="' . $varname . ' img-responsive" src="' . base_url($image) . '" />', $template);
 						
 						}
-					}
-				}
+                                                if( array_key_exists($varname, $posted_data) && $variable->type_id ==2 && isset($pdf_file)) {
+//                                                       
+							$users_document_fields[$varname] 	= array(
+								'user_id'			=> $associate_id,
+								'document_id'		=> $document_id,
+								'variable_id'		=> $variable->variable_id,
+								'varname_value'		=> $image,
+                                                                );
 
+							$attachment_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
+                                                        $path=base_url().$pdf_file . $posted_data['variable_file'];
+							file_put_contents($attachment_path, file_get_contents($path));
+							echo $image 		= $this->image_dir . $document_id . $associate_id . $varname;
+							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname), ' class="' . $varname . ' img-responsive" src="' . base_url($image) . '" width="125" style="width:80%;"/>', $template);
+//						print_r($template);exit;
+						}
+//                                                echo "repalce ".$replace."<br/>";
+//                                                echo $variable->variable_id. "-" .$variable->varname."<br/>";
+					}
+//                                        exit;
+				}
+//                                echo '<pre>';
+//print_r($users_document_fields);echo '</pre>';exit;
 				{
 					$this->load->library('Pdf');
 					//$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -216,7 +277,7 @@ class Generate extends MY_Controller {
 						$pdf_file	= $associate_document->file_url;
 					}
 				}
-
+//                                print_r($users_document_fields);exit;
 				if( is_array($users_document_fields) ) {
 
 					$this->document_update_model->create_document_fields( $users_document_fields );
@@ -251,7 +312,7 @@ class Generate extends MY_Controller {
 
 							$asso_doc_info = (object)array_merge( (array)$associate_info, $document_list_name );
 							
-							$this->document_update_model->send_email( 'status_change_from_hr_to_process_to_hr_email_sent', $asso_doc_info->email, $asso_doc_info );
+//							$this->document_update_model->send_email( 'status_change_from_hr_to_process_to_hr_email_sent', $asso_doc_info->email, $asso_doc_info );
 
 							break;
 						
@@ -265,7 +326,7 @@ class Generate extends MY_Controller {
 
 							$asso_doc_info = (object)array_merge( (array)$associate_info, $document_list_name );
 							
-							$this->document_update_model->send_email( 'status_change_from_hr_email_sent_to_hr_to_verify', $associate_info->email, $asso_doc_info );
+//							$this->document_update_model->send_email( 'status_change_from_hr_email_sent_to_hr_to_verify', $associate_info->email, $asso_doc_info );
 							break;
 					}
 					//Notification email to HR Admin when status is change end here
@@ -306,6 +367,7 @@ class Generate extends MY_Controller {
 		}
 
 		$this->data['signature_variables'] = $signature_variables;
+//                print_r($this->data['template']);exit;
 		$this->load->view('common/header');
 		$this->load->view('generate', $this->data);
 		$this->load->view('common/footer');
@@ -445,5 +507,6 @@ class Generate extends MY_Controller {
 		}
 		redirect( 'new_associate/dashboard/' );
 	}
+       
 	
 }

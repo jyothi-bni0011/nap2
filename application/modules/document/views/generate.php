@@ -47,7 +47,7 @@
 				<form class="card card-primary border-0" method="POST" action="<?php echo current_url().'?r=dashboard'; ?>" autocomplete="off">
 			<?php endif; ?>
 		<?php else: ?>
-		<form class="card card-primary border-0" method="POST" action="<?php echo current_url(); ?>" autocomplete="off">
+		<form class="card card-primary border-0" method="POST" enctype="multipart/form-data" action="<?php echo current_url(); ?>" autocomplete="off">
 		<?php endif; ?>
 			<input type="hidden" name="document_id" value="<?php echo $document->document_id; ?>">
 			<div class="card-header bg-danger"><span class="card-title">Available variables</span></div>
@@ -60,17 +60,35 @@
 
 						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="signature" onclick="return false;"><?php echo $variable->field_name; ?></button>
 					<?php else: ?>
-					<label for="" class="small mb-0"><?php echo $variable->field_name; ?></label>
-					<input type="text" name="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>">
-					<?php endif; ?>
+                                            <?php if($variable->type_id==1):echo $variable->field_name;?>
+                                                <input type="radio" name="var_feild_radio" id="<?php echo $varname; ?>" class="update-changes" value="<?php echo $variable->varname; ?>" required="">
+                                            
+                                                <?php endif; ?>
+                                            <?php if($variable->type_id==0):?>
+                                            <label for="" class="small mb-0"><?php echo $variable->field_name; ?></label>
+                                            <input type="text" name="<?php echo $varname; ?>" id="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>">
+                                            
+                                                <?php endif; ?>
+                                             <?php if($variable->type_id==2):?>
+                                            <input type="hidden" name="<?php echo $varname; ?>" value="<?php echo $varname; ?>">
+                                           <input type="file" id="fileinput" name="variable_file" style="height:0;overflow:hidden;">
+						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="attachment" onclick="return false;"><?php echo $variable->field_name; ?></button>
+
+                                            <div class="preview"></div>
+                                          
+                                             <?php endif; ?>
+                                            
+                                        <?php endif; ?>
 				</div>
 				<?php endforeach; else: ?>
-				<a href="#" class="no-variable border-0 list-group-item list-group-item-action">No variables are assigned for this document.</a>
+				<a href="#" class="no-variable border-0 list-group-item list-group-item-action">Read and Review –  No signature is required.</a>
 				<?php endif; ?>
 			</div>
 			<button class="btn bg-danger btn-block" type="submit">Create Document</button>
 		</form>
+                                  
 	</div>
+    
 	<div class="col-md-9">
 		<?php if( !empty($message) ) echo $message; ?>
 		<div class="card card-primary generate-document">
@@ -79,6 +97,7 @@
 			</div>
 		</div>
 	</div>
+    
 </div>
 <?php endif; ?>
 
@@ -101,7 +120,29 @@
 </div>
 
 <script>
+ $("#attachment").click(function() {
+    
+    $("#fileinput").click();
+    
+  });
 
+  $("#fileinput").change(function() {
+    if (this.files && this.files[0]) {
+      var reader = new FileReader();
+      reader.onload = imageIsLoaded;
+      reader.readAsDataURL(this.files[0]);
+    }
+  });
+
+  function imageIsLoaded(e) {
+    var x = 'foo';
+    
+    var attachment_var = $('input[name="var_voided_check_attachment"]').val();
+//    $('.generate-document .' + attachment_var ).empty().append(picture);
+			$('.generate-document .' + attachment_var ).after('<span class="' + attachment_var + '"><img src="' + e.target.result + '"  class="img-responsive"/></span>').remove();
+			$('form input[name="' + attachment_var + '"]').val(e.target.result);
+  }
+    
 	$(document).ready(function(){
 		var file_msg = '<i>(Max file size : <?php echo ini_get('upload_max_filesize'); ?> )<i/>'
 		$('input[type="file"]').on('change',function(){
@@ -197,6 +238,8 @@
 		this._ctx.putImageData(imageData, 0, 0);
 
 	};
+        
+       
 </script>
 <style type="text/css">
 	.generate-variable [class*="var_"] { /*font-size: 0px;*/color: white; height: 30px; width: 100%; background: #bd2130!important; border-radius: 2px; cursor: pointer; border: 0; }
