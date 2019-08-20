@@ -81,7 +81,7 @@ class Create extends MY_Controller {
 
 								$values = (object) array_merge( (array)$values, $url );
 
-								if ( $this->create_model->send_email( 'welcome_associate', 'venkatesh.jewlikar@talentserv.co.in', $values ) )//$this->input->post('email') 
+								if ( $this->create_model->send_email( 'welcome_associate', $this->input->post('email'), $values ) )//$this->input->post('email') 
 								{
 									$this->session->set_flashdata('message', 'User has been created.');
 								}

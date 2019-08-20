@@ -101,8 +101,9 @@ class Assign_document extends MY_Controller {
 
 										$values = (object) array_merge( (array)$values, $url );
 
-										if ( $this->create_model->send_email( 'welcome_associate', $this->input->post('email'), $values ) )//$this->input->post('email') 
+										if ( $send_mail=$this->create_model->send_email( 'welcome_associate','jyothi.m@bluenettech.com', $values ) )//$this->input->post('email') 
 										{
+                                                                                    print_r($send_mail);exit;
 											$this->session->set_flashdata('message', 'New Associate has been created.');
 										}
 										else
@@ -113,7 +114,7 @@ class Assign_document extends MY_Controller {
 										//insert in log for User
 										$this->create_model->insert_log_history( (int)$this->session->userdata('user_id'), 'User', 'New User \''.$this->input->post('username').'\' is created' );
 						
-										$this->session->set_flashdata('message', 'User has been created.');
+//										$this->session->set_flashdata('message', 'User has been created.');
 										redirect( '/new_associate'  );
 									}
 									// else {
