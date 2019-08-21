@@ -19,7 +19,7 @@ class Document extends MY_Controller {
 		$this->load->view('document', $this->data);
 		$this->load->view('common/footer');
 	}
-	
+
 	public function tiny_img_upload()
 	{
 		

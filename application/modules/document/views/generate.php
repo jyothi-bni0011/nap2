@@ -60,10 +60,10 @@
 
 						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="signature" onclick="return false;"><?php echo $variable->field_name; ?></button>
 					<?php else: ?>
-                                            <?php if($variable->type_id==1):echo $variable->field_name;?>
+                                            <?php if($variable->type_id==1):?>
                                                 <input type="radio" name="var_feild_radio" id="<?php echo $varname; ?>" class="update-changes" value="<?php echo $variable->varname; ?>" required="">
                                             
-                                                <?php endif; ?>
+                                                <?php echo $variable->field_name; endif; ?>
                                             <?php if($variable->type_id==0):?>
                                             <label for="" class="small mb-0"><?php echo $variable->field_name; ?></label>
                                             <input type="text" name="<?php echo $varname; ?>" id="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>">

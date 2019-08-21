@@ -89,7 +89,7 @@ $(document).ready(function(){
                
 		var varname = $(this).attr('id');
                 $("#done").remove();
-		$("." + varname).append('<i class="material-icons" id="done" style="font-size: 15px;">done</i> ');
+		$("." + varname).prepend('<i class="material-icons" id="done" style="font-size: 15px;font-weight: bold;">done</i> ');
 	});
 	$(document).on('focus', 'input[type="text"]', function(event) {
 		var varname = $(this).attr('id');
@@ -156,7 +156,6 @@ $(document).ready(function(){
 	// Rearrange Available variables according to template variable entries
 	var variables_pos 		= $('.generate-document [class*="var_"]');
 	console.log(variables_pos);
-        console.log('end');
 	if( variables_pos.length ) {
 
 		var generate_variables 	= $('.generate-variable .form-group'),

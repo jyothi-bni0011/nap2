@@ -58,7 +58,7 @@ if ( ! function_exists('success_message'))
 }
 
 function search_revisions($dataArray, $search_value, $key_to_search, $other_matching_value = null, $other_matching_key = null) {
-    // This function will search the revisions for a certain value
+// This function will search the revisions for a certain value
     // related to the associative key you are looking for.
     $keys = array();
     foreach ($dataArray as $key => $cur_value) {
