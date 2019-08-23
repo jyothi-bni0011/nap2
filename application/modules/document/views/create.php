@@ -191,6 +191,14 @@
 						<?php endforeach; ?>
 					</select>
 				</div>
+                                <div class="form-group feild_radio">
+					<label for="" class="small">Select Type</label>
+					<select name="type_id" class="form-control" id="type_id">
+                                             <option value="0">Text</option>
+                                            <option value="1">Radio</option>
+                                            <option value="2">File</option>
+					</select>
+				</div>
 			</div>
 			<div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

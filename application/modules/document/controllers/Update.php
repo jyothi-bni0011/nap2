@@ -50,16 +50,19 @@ class Update extends MY_Controller {
 					}
 					
 				}
-			}
-			else
-			{
-				$_POST['doc_type'] = 1;
-			}
-			//Upload doc End
-			if( $this->document_update_model->update( $this->input->post('document_id'), $this->input->post('document_title'), $this->input->post('document', FALSE), $this->input->post('doc_folder'), $this->input->post('doc_category'), $this->input->post('status'), $this->input->post('form_steps'), $this->input->post('doc_password'), $this->input->post('doc_type') ) )
-			{
+                                } else {
+                                    $_POST['doc_type'] = 1;
+                                }
+                                if ($this->input->post('doc_password') != "" && $_POST['doc_type']==2) {
+                                    $password = $this->input->post('doc_password');
+                                    $origFile = 'assets/uploaded_documents/'.$_POST['document'];
+                                    $destFile = 'assets/uploaded_documents/'.$_POST['document'];
+                                    @pdfEncrypt($origFile, $password, $destFile);
+                                }
+            //Upload doc End
+            if ($this->document_update_model->update($this->input->post('document_id'), $this->input->post('document_title'), $this->input->post('document', FALSE), $this->input->post('doc_folder'), $this->input->post('doc_category'), $this->input->post('status'), $this->input->post('form_steps'), $this->input->post('doc_password'), $this->input->post('doc_type'))) {
 
-				if( ! empty($_POST['variables']) AND count($_POST['variables']) ) 
+                if( ! empty($_POST['variables']) AND count($_POST['variables']) ) 
 				{
 //                                    print_r($this->input->post('variables'));exit;
 					foreach ($this->input->post('variables') as $value) {
@@ -119,5 +122,19 @@ class Update extends MY_Controller {
 		$this->load->view('update', $this->data);
 		$this->load->view('common/footer');
 	}
+        
+
+    
+    public function test() {
+        $password = 'Jyothi';
+        $origFile = 'assets/uploaded_documents/smsc_relaving.pdf';
+        $destFile = 'assets/uploaded_documents/smsc_relaving_lock.pdf';
+        $res = pdfEncrypt($origFile, $password, $destFile);
+        if ($res) {
+            echo "Success" . "<br/>Unlock Pdf With password : $password";
+        } else {
+            echo "fail";
+        }
+    }
 
 }

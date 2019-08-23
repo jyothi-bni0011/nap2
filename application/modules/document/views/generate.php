@@ -136,8 +136,8 @@
 
   function imageIsLoaded(e) {
     var x = 'foo';
-    
-    var attachment_var = $('input[name="var_voided_check_attachment"]').val();
+    var name=$("#attachment").attr("name");
+    var attachment_var = $('input[name= '+ name + ']').val();
 //    $('.generate-document .' + attachment_var ).empty().append(picture);
 			$('.generate-document .' + attachment_var ).after('<span class="' + attachment_var + '"><img src="' + e.target.result + '"  class="img-responsive"/></span>').remove();
 			$('form input[name="' + attachment_var + '"]').val(e.target.result);

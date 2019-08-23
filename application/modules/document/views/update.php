@@ -89,7 +89,7 @@
 						      <input type="checkbox" id="is_password" aria-label="form-control input-height" name="pass_check" <?php if( $document->document_password != null ) echo "checked"; ?> >
 						    </div>
 						  </div>
-						  <input type="password" name="doc_password" class="form-control input-height" aria-label="Text input with checkbox" id="pass_text" <?php if( $document->document_password != null ) { echo 'value = "'. $document->document_password .'"'; } else { echo "disabled"; } ?> >
+						  <input type="password" name="doc_password" class="form-control input-height" aria-label="Text input with checkbox" id="pass_text" <?php if( $document->document_password != null ) { echo 'value = "'. $this->encrypt->decode($document->document_password) .'"'; } else { echo "disabled"; } ?> >
 						  <span toggle="#pass_text" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
 						</div>
 					</div>
