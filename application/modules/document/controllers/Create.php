@@ -41,6 +41,12 @@ class Create extends MY_Controller {
 				else{
 					$_POST['doc_type'] = 1;
 				}
+                                if ($this->input->post('doc_password') != "") {
+                                    $password = $this->input->post('doc_password');
+                                    $origFile = 'assets/uploaded_documents/'.$_POST['document'];
+                                    $destFile = 'assets/uploaded_documents/'.$_POST['document'];
+                                    @pdfEncrypt($origFile, $password, $destFile);
+                                }
 				$document_id = $this->document_create_model->create( 
 					$this->input->post('document_title'), 
 					$this->input->post('document', FALSE),
@@ -64,7 +70,7 @@ class Create extends MY_Controller {
 								$value['field_name'], 
 								$value['varname'], 
 								$document_id, 
-								$value['role_id'] 
+								$value['role_id'],$value['type_id']
 							);
 						}
 					}

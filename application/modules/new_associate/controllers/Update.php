@@ -89,7 +89,7 @@ class Update extends MY_Controller {
 					$this->update_model->insert_log_history( (int)$this->session->userdata('user_id'), 'New Associate', 'New Associate \''.$this->input->post('username').'\' is updated' );
 					
 					$this->session->set_flashdata('message', 'Associate has been updated.');
-					redirect( '/new_associate', $data );
+                                        redirect( '/document/assign_document/index/'.$result->{NEW_ASSOCIATE_ID}, $data );
 				}
 				else {
 					//$data['message'] = "Failed to crate the role";

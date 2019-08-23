@@ -163,15 +163,17 @@ class Generate extends MY_Controller {
 				$users_document_fields			= [];
 				if( isset($variables) AND count($variables) ) 
 				{
-                                    if($variable->type_id==1){
-                                  $findKey = search_revisions($var_array,$posted_data['var_feild_radio'], 'varname');
-                                  $findKey=implode(',',$findKey);
-                                  $var_feild_radio_id=$var_array[$findKey]['variable_id'];
-                                  $var_feild_radio_varname=sprintf('var_%s', str_replace(['{','}'], "", $var_array[$findKey]['varname']));
-                                    }
+                                   
+                                   
 					foreach ($variables as $variable) 
 					{
                                                 if($variable->type_id==1){
+                                                 //updated on 23/08/2019
+                                                     $findKey = search_revisions($var_array,$posted_data['var_feild_radio'], 'varname');
+                                                    $findKey=implode(',',$findKey);
+                                                    $var_feild_radio_id=$var_array[$findKey]['variable_id'];
+                                                    $var_feild_radio_varname=sprintf('var_%s', str_replace(['{','}'], "", $var_array[$findKey]['varname']));
+                                                //end
 						$varname ="var_feild_radio";
                                                 $variable_id=$var_feild_radio_id;
                                                 }if($variable->type_id==0){
@@ -229,7 +231,7 @@ class Generate extends MY_Controller {
                                                         $path=base_url().$pdf_file . $posted_data['variable_file'];
 							file_put_contents($attachment_path, file_get_contents($path));
 							echo $image 		= $this->image_dir . $document_id . $associate_id . $varname;
-							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname), ' class="' . $varname . ' img-responsive" src="' . base_url($image) . '" width="125" style="width:80%;"/>', $template);
+							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname),'<img  class="' . $varname . ' img-responsive" src="' . base_url($image) . '" width="125" style="width:80%;"/>', $template);
 //						print_r($template);exit;
 						}
 //                                                echo "repalce ".$replace."<br/>";

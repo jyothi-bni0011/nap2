@@ -21,6 +21,16 @@ class Assign_document extends MY_Controller {
 		// }
 
 		$data['title'] = "Assign Document To New Associate";
+                if($associate_id){
+                    $data['associate_id'] = $associate_id;
+                    $data['documents'] = $this->assign_document_model->get_documents();
+                    $data['doc_categories'] = $this->assign_document_model->getAll( DOCUMENT_CATEGORY );
+                    $data['assigned_documents'] = $this->assign_document_model->get_documents($associate_id);
+//                    print_r($data['assigned_documents']);exit;
+                    $this->load->view('common/header');
+                    $this->load->view('update_assign_document', $data);
+                    $this->load->view('common/footer');
+                }
 		if( count($_POST) ) 
 		{
 			$this->form_validation->set_rules('username', 'User Name', 'trim|required|max_length[49]');
@@ -101,7 +111,7 @@ class Assign_document extends MY_Controller {
 
 										$values = (object) array_merge( (array)$values, $url );
 
-										if ( $send_mail=$this->create_model->send_email( 'welcome_associate','jyothi.m@bluenettech.com', $values ) )//$this->input->post('email') 
+										if ( $send_mail=$this->create_model->send_email( 'welcome_associate',$this->input->post('email'), $values ) )//$this->input->post('email') 
 										{
                                                                                     print_r($send_mail);exit;
 											$this->session->set_flashdata('message', 'New Associate has been created.');
@@ -162,58 +172,27 @@ class Assign_document extends MY_Controller {
 			
 			/*redirect( '/new_associate', $data );*/
 		}
-		else
-		{
-			redirect( '/new_associate/create' );	
-			exit();
-		}
-		// print_r( $_POST ); exit();
 		
-		// if( ! $associate_id AND ! count($_POST) ) {
-		// 	$this->session->set_flashdata('message', error_message('Associate ID is required for assigning documents.'));
-		// 	redirect('/new_associate');
-		// }
-
-
-		// if( count($_POST) ) 
-		// {
-		// 	if ( !isset( $_POST['documents'] ) ) {
-		// 		$this->session->set_flashdata('message', 'Please select at least 1 document.');
-		// 		redirect( '/document/assign_document/index/'.$_POST['associate_id'] ); 
-		// 	}
-			
-			
-		// 	$this->form_validation->set_rules('documents', 'Documents', 'trim');
-		// 	if( $this->form_validation->run() ) 
-		// 	{
-
-		// 		if( $inserted_id = $this->assign_document_model->create( $this->input->post('documents'), $this->input->post('associate_id') ) ) {
-						
-		// 			$this->session->set_flashdata('message', 'New Associate has been created.');
-		// 			redirect( '/new_associate'  );
-		// 		}
-		// 		else {
-		// 			$this->session->set_flashdata('message', 'Failed to create the user');
-		// 			redirect( '/document/assign_document/index/'.$_POST['associate_id'] );
-		// 		}
-		// 	}
-		// 	else {
-		// 		$this->session->set_flashdata('message', validation_errors());
-		// 		redirect( '/document/assign_document/index/'.$_POST['associate_id'] );
-		// 	}
-			
-		// 	redirect( '/new_associate', $data );
-		// }
 		
-		// $job_title = $this->assign_document_model->getById( NEW_ASSOCIATE, NEW_ASSOCIATE_ID, $associate_id );
-		// $data['documents'] = $this->assign_document_model->get_documents( $job_title->{JOB_POSITION_ID} );
-		// $data['associate_id'] = $associate_id;
-		// $this->load->view('common/header');
-		// $this->load->view('assign_document', $data);
-		// $this->load->view('common/footer');
 
 	}
-
+        public function document_order(){
+        $data['title'] = "Documents Order";
+        $data['documents'] = $this->assign_document_model->alldocuments();
+        $data['doc_categories'] = $this->assign_document_model->getAll( DOCUMENT_CATEGORY );
+        if(count($_POST)){
+          $idArray = explode(",", $_POST['ids']);
+          $update = $this->assign_document_model->updateOrder( $idArray );
+          if($update){
+              return "success";
+              exit;
+          }
+        }
+//                    print_r($data['assigned_documents']);exit;
+        $this->load->view('common/header');
+        $this->load->view('document_order', $data);
+        $this->load->view('common/footer');
+        }
 	public function doc_by_category()
 	{
 		if ( !empty( $_POST ) ) {

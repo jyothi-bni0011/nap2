@@ -10,7 +10,7 @@ class Document_model extends CI_Model {
 		$this->db->from('document');
 		$this->db->join('document_folder', 'document_folder.doc_folder_id = document.doc_folder_id', 'left');
 		$this->db->join('document_category', 'document_category.doc_category_id = document.doc_category_id', 'left');
-		
+		$this->db->order_by('document.document_order','ASC');
 		$query = $this->db->get();
 
 		if( $query->num_rows() ) {

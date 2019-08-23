@@ -22,6 +22,7 @@ class Dashboard_model extends CI_Model {
 		$this->db->join( 'document','document.document_id = user_document_mapping.document_id', 'left' );
 		$this->db->join( 'document_category','document_category.doc_category_id = document.doc_category_id', 'left' );
 		$this->db->where( 'user_document_mapping.user_id', $associate_id );
+                $this->db->order_by('document.document_order','ASC');
 		$query = $this->db->get();
 		
 		return $query->result();

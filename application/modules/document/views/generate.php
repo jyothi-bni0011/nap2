@@ -60,10 +60,10 @@
 
 						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="signature" onclick="return false;"><?php echo $variable->field_name; ?></button>
 					<?php else: ?>
-                                            <?php if($variable->type_id==1):echo $variable->field_name;?>
+                                            <?php if($variable->type_id==1):?>
                                                 <input type="radio" name="var_feild_radio" id="<?php echo $varname; ?>" class="update-changes" value="<?php echo $variable->varname; ?>" required="">
                                             
-                                                <?php endif; ?>
+                                                <?php echo $variable->field_name; endif; ?>
                                             <?php if($variable->type_id==0):?>
                                             <label for="" class="small mb-0"><?php echo $variable->field_name; ?></label>
                                             <input type="text" name="<?php echo $varname; ?>" id="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>">
@@ -136,8 +136,8 @@
 
   function imageIsLoaded(e) {
     var x = 'foo';
-    
-    var attachment_var = $('input[name="var_voided_check_attachment"]').val();
+    var name=$("#attachment").attr("name");
+    var attachment_var = $('input[name= '+ name + ']').val();
 //    $('.generate-document .' + attachment_var ).empty().append(picture);
 			$('.generate-document .' + attachment_var ).after('<span class="' + attachment_var + '"><img src="' + e.target.result + '"  class="img-responsive"/></span>').remove();
 			$('form input[name="' + attachment_var + '"]').val(e.target.result);
