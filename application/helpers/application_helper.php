@@ -77,7 +77,7 @@ function pdfEncrypt($origFile, $password, $destFile) {
         require_once('fpdi/FPDI_Protection.php');
 
         $pdf =  new FPDI_Protection();
-        $pdf->FPDF('P', 'in', array('6', '9'));
+        $pdf->FPDF('P', 'in');
 
         $pagecount = $pdf->setSourceFile($origFile);
 

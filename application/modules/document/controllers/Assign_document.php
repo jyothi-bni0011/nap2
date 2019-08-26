@@ -113,7 +113,7 @@ class Assign_document extends MY_Controller {
 
 										if ( $send_mail=$this->create_model->send_email( 'welcome_associate',$this->input->post('email'), $values ) )//$this->input->post('email') 
 										{
-                                                                                    print_r($send_mail);exit;
+//                                                                                    print_r($send_mail);exit;
 											$this->session->set_flashdata('message', 'New Associate has been created.');
 										}
 										else

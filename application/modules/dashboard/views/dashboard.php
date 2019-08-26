@@ -4,6 +4,7 @@
 		<div class=" pull-left">
 			<div class="page-title">Dashboard</div>
 		</div>
+            
 		<ol class="breadcrumb page-breadcrumb pull-right">
 			<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url( 'dashboard' ); ?>">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
 			</li>
@@ -11,6 +12,7 @@
 		</ol>
 	</div>
 </div>
+<div><?php echo $this->session->flashdata('message');?></div>
 <div class="state-overview">
 	<div class="row">
 		<div class="col-xl-3 col-md-3 col-12">
