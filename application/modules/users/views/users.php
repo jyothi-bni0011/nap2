@@ -60,8 +60,8 @@
 
                                          		<tr class="odd gradeX">
                                                     <td><?= $i++; ?></td>
-                                                    <td><?php echo $user->{USERNAME}; ?></td>
-                                         			<td><?php echo $user->{USER_FIRST_NAME}; ?></td>
+                                                    <td><?php echo ucwords($user->{USERNAME}); ?></td>
+                                                    <td><?php echo ucfirst($user->{USER_FIRST_NAME}); ?></td>
                                          			<td><?php echo $user->{USER_LAST_NAME}; ?></td>
                                                     <!-- <td><?php //echo $user->role_name; ?></td> -->
                                                     <td><?php echo $user->{USER_EMAIL}; ?></td>

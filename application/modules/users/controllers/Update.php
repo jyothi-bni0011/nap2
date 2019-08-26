@@ -32,7 +32,7 @@ class Update extends MY_Controller {
 				
 				if ( $result->username != $this->input->post('user_name') ) {
 					if ( $this->update_model->check_duplicate( USER, USERNAME, $this->input->post('user_name') ) ) {
-						$update[USERNAME] = $user_name;
+						$update[USERNAME] = $this->input->post('user_name');
 					}
 					else {
 						$this->session->set_flashdata('message', 'Duplicate Username. Failed to update the user');
@@ -42,7 +42,7 @@ class Update extends MY_Controller {
 
 				if ( $result->email_id != $this->input->post('user_email') ) {
 					if ( $this->update_model->check_duplicate( USER, USER_EMAIL, $this->input->post('user_email') ) ) {
-						$update[USER_EMAIL] = $user_email;	
+						$update[USER_EMAIL] = $this->input->post('user_email');
 					}
 					else {
 						$this->session->set_flashdata('message', 'Duplicate Email. Failed to update the user');
@@ -52,7 +52,6 @@ class Update extends MY_Controller {
 
 				if( $this->update_model->update( $this->input->post('user_first_name'), $this->input->post('user_last_name'), $this->input->post('user_name'), $this->input->post('user_email'), $this->input->post('user_id'), $this->input->post('user_role') ) ) {
 					//$data['message'] = "Role has been created.";
-					
 					//insert in log
 					$this->update_model->insert_log_history( (int)$this->session->userdata('user_id'), 'User', 'User \''.$this->input->post('user_name').'\' is updated' );
 					
