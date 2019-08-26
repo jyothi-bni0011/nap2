@@ -7,7 +7,7 @@ class MY_Model extends CI_Model {
 	//This function check duplicate entry in database. If entry is duplicate then it return false and if no duplicate entry then return true.
 	public function check_duplicate( $table, $column, $value, $notin=0, $notincolunm='' )
 	{
-		$this->db->where($column, $value);
+		$this->db->where('"'.$column.'" like binary "'.$value.'"', NULL, FALSE);
 		
 		if ($notin != 0) {
 			$this->db->where_not_in( $notincolunm, $notin );
