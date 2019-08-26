@@ -73,7 +73,7 @@ class MY_Model extends CI_Model {
 			$this->email->message( $email_body );
 			if($this->email->send())
 			{
-				echo 'Email sent.';
+//				echo 'Email sent.';
 				return true;
 			}
 			else

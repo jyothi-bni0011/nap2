@@ -147,7 +147,7 @@ class Dashboard extends MY_Controller {
 		$associate_info = $this->create_model->get_data_for_new_associate( '', $associate_id );
 
 		$this->dashboard_model->send_email( 'follow_up', $associate_info->email, $associate_info );//$associate_info->email
-		
+		$this->session->set_flashdata('message', 'Mail Has been sent, Succesfully.');
 		redirect('dashboard','refresh');
 		exit();
 		

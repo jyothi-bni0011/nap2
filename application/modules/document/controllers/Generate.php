@@ -229,7 +229,9 @@ class Generate extends MY_Controller {
 
 							$attachment_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
                                                         $path=base_url().$pdf_file . $posted_data['variable_file'];
+                                                        
 							file_put_contents($attachment_path, file_get_contents($path));
+                                                        
 							echo $image 		= $this->image_dir . $document_id . $associate_id . $varname;
 							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname),'<img  class="' . $varname . ' img-responsive" src="' . base_url($image) . '" width="125" style="width:80%;"/>', $template);
 //						print_r($template);exit;
