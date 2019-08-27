@@ -120,6 +120,7 @@
 </div>
 
 <script>
+    
  $("#attachment").click(function() {
     
     $("#fileinput").click();
@@ -127,6 +128,11 @@
   });
 
   $("#fileinput").change(function() {
+      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only formats are allowed : "+fileExtension.join(', '));
+            return false;
+        }
     if (this.files && this.files[0]) {
       var reader = new FileReader();
       reader.onload = imageIsLoaded;
