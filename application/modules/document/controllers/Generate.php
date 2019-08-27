@@ -117,7 +117,7 @@ class Generate extends MY_Controller {
 					$replace 		= sprintf('<span class="var_%s">%s</span>', str_replace(['{','}'], "", $document_value->varname), $document_value->varname_value);
 					$template 		= str_replace($document_value->varname, $replace, $template);
 
-					if( in_array($document_value->varname, $signature_variables) || $document_value->varname== "{voided_check_attachment}" ) {
+					if( in_array($document_value->varname, $signature_variables) || $document_value->type_id== 2 ) {
 
 						$signature_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
 
@@ -141,6 +141,8 @@ class Generate extends MY_Controller {
 
                                     $pdf_file = '.' . $this->pdf_dir . "variable_files" . '/';
                                     $posted_data['variable_file'] = $this->document_update_model->do_upload( 'variable_file', $pdf_file , $file_name);
+                                
+//                                    print_r($posted_data['variable_file']);exit;
                                 }
 				$form_step = $this->document_update_model->get_form_steps( $document_id, $associate_document->form_step );
 				if( ! empty( $form_step ) 
@@ -176,14 +178,21 @@ class Generate extends MY_Controller {
                                                 //end
 						$varname ="var_feild_radio";
                                                 $variable_id=$var_feild_radio_id;
-                                                }if($variable->type_id==0){
+                                                }
+                                                
+                                                if($variable->type_id==0){
 						$varname = sprintf('var_%s', str_replace(['{','}'], "", $variable->varname));
                                                 $variable_id=$variable->variable_id;
-                                                }if($variable->type_id==2 && isset($pdf_file)){
+                                                }
+                                                
+                                                if($variable->type_id==2 && isset($pdf_file)){
+                                                    
 						$varname = sprintf('var_%s', str_replace(['{','}'], "", $variable->varname));
                                                 $variable_id=$variable->variable_id;
                                                 $image 		= base_url().$pdf_file . $posted_data['variable_file'];
+                                                
                                                 }
+//                                                print_r($image);exit;
 						if( array_key_exists($varname, $posted_data) && ! array_key_exists($varname, $signature_variables) && $variable->type_id !=2 ) {
 							$users_document_fields[$varname] 	= array(
 								'user_id'			=> $associate_id,
@@ -231,7 +240,7 @@ class Generate extends MY_Controller {
                                                         $path=base_url().$pdf_file . $posted_data['variable_file'];
                                                         
 							file_put_contents($attachment_path, file_get_contents($path));
-                                                        
+//                                                        unlink($path);
 							echo $image 		= $this->image_dir . $document_id . $associate_id . $varname;
 							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname),'<img  class="' . $varname . ' img-responsive" src="' . base_url($image) . '" width="125" style="width:80%;"/>', $template);
 //						print_r($template);exit;

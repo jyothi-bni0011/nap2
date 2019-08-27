@@ -41,7 +41,7 @@ class Create extends MY_Controller {
 				else{
 					$_POST['doc_type'] = 1;
 				}
-                                if ($this->input->post('doc_password') != "") {
+                                if ($this->input->post('doc_password') != "" && $_POST['doc_type']==2) {
                                     $password = $this->input->post('doc_password');
                                     $origFile = 'assets/uploaded_documents/'.$_POST['document'];
                                     $destFile = 'assets/uploaded_documents/'.$_POST['document'];

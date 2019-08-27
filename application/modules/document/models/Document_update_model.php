@@ -68,7 +68,7 @@ class Document_update_model extends MY_Model {
 	public function get_document_values( $document_id, $associate_id )
 	{
 		
-		$query = $this->db->select('users_document_fields.*, document_variables.varname')
+		$query = $this->db->select('users_document_fields.*, document_variables.varname,document_variables.type_id')
 			->from('users_document_fields')
 			->join('document_variables', 'document_variables.variable_id = users_document_fields.variable_id', 'left')
 			->where('users_document_fields.document_id', $document_id)
