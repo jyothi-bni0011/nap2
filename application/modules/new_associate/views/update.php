@@ -137,8 +137,8 @@
                             <label class="col-md-3 control-label">Start Date
                                 <span class="required"> * </span>
                             </label>
-                            <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-dd-mm" data-link-field="dtp_input1" style="flex-wrap: nowrap;">
-                                 <div class="col-md-12" style="padding: 0px;"><input class="form-control" size="16" type="text" value="<?php echo $start_date; ?>" id="start_date" name="start_date1" readonly data-msg-required="Start Date is required."></div>
+                            <div class="input-group date form_date col-md-5" data-date="" data-date-format="MM,dd,yyyy" data-link-field="dtp_input1" style="flex-wrap: nowrap;">
+                                 <div class="col-md-12" style="padding: 0px;"><input class="form-control" size="16" type="text" value="<?php echo date("F,d,Y", strtotime($start_date)); ?>" id="start_date" name="start_date1" readonly data-msg-required="Start Date is required."></div>
                                  <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                             </div>
                             <input type="hidden" id="dtp_input1" value="<?php echo $start_date; ?>" name="start_date"/>
@@ -159,7 +159,7 @@
                              </label>
                              <div class="col-md-5">
                                   <select class="form-control input-height" name="status" id="status" data-msg-required="Status is required.">
-                                       <option value="">Status</option>
+                                 <option value="">Status</option>
                                  <option value="1" <?php if($status == 1) echo "selected"; ?> >Active</option>
                                  <option value="0" <?php if($status == 0) echo "selected"; ?> >Inactive</option>
                                    </select> 

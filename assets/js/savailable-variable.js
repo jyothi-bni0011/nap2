@@ -60,12 +60,8 @@ $(document).ready(function(){
                         type_name			= $(this).find('select[name="type_id"] option:selected').text(),
 			role_name		= $(this).find('select[name="role_id"] option:selected').text(),
 			key 			= varname.replace('{', '').replace('}', '');
-                        var model_type=$('#var_create_modal').find('input[name="modal_type"]').val();
                         
-                        if(model_type == "system"){
-                           type_name="sign";
-                           type_id="3";
-                        }
+                       
 			input_hidden 	= 
 				'<input type="hidden" name="variables[' + key + '][field_name]" value="' + field_name + '">' +
 				'<input type="hidden" name="variables[' + key + '][varname]" value="' + varname + '">' +

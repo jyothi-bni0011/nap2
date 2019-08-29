@@ -251,8 +251,9 @@ class Generate extends MY_Controller {
 //                                        exit;
 				}
 //                                echo '<pre>';
-//print_r($users_document_fields);echo '</pre>';exit;
+//print_r($template);echo '</pre>';exit;
 				{
+                                    set_time_limit(0);
 					$this->load->library('Pdf');
 					//$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
 					$pdf = new Pdf();
@@ -274,7 +275,7 @@ class Generate extends MY_Controller {
 					$pdf->SetDisplayMode('real', 'default');
 					$pdf->AddPage();
 					$pdf->writeHTML($template, true, false, true, false, '');
-
+//                                        echo $pdf_path;exit;
 					if( file_exists($pdf_path) ) {
 						unlink( $pdf_path );
 					}
@@ -372,7 +373,7 @@ class Generate extends MY_Controller {
 				}
 
 			}
-
+//                        echo "no post data";exit;
 			$this->data['document'] = $document;
 			$this->data['template'] = $template;
 			$this->data['associate_document'] = $associate_document;

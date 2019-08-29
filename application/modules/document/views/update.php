@@ -150,6 +150,7 @@
 						<div class="card card-primary border-0">
 							<div class="card-header bg-danger"><span class="card-title">Available variables</span></div>
 							<ul class="list-group" id="available-variable">
+                                                            
 								<?php if( ! empty($variables) ): foreach ($variables as $variable): ?>
 								<a href="javascript:return false;" class="active-variable list-group-item list-group-item-action border-0" data-field_name="<?php echo $variable->field_name; ?>" data-varname="<?php echo $variable->varname; ?>" data-type="<?php echo $variable->type_id; ?>">
                                                                         <?php echo $variable->varname; ?><span class="badge badge-primary badge-pill"><?php echo $variable->role_name; ?></span>
@@ -162,6 +163,9 @@
                                                                         <?php }?>
                                                                          <?php if($variable->type_id==2){ ?>
                                                                         <span class="badge badge-danger badge-pill"><?php echo "File"; ?></span>
+                                                                        <?php }?>
+                                                                         <?php if($variable->type_id==3){ ?>
+                                                                        <span class="badge badge-danger badge-pill"><?php echo "Sign"; ?></span>
                                                                         <?php }?>
                                                                         
 								</a>
