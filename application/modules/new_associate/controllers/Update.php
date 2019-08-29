@@ -59,7 +59,7 @@ class Update extends MY_Controller {
 				$result = $this->update_model->fetch_data($this->input->post('associate_id'));
 		
 				if ( $result->{NEW_ASSOCIATE_USERNAME} != $this->input->post('username') ) {
-					if ( $this->update_model->check_duplicate( USER, USERSNAME, $this->input->post('username') ) ) {
+					if ( $this->update_model->check_duplicate( USER, USERNAME, $this->input->post('username') ) ) {
 						
 					}
 					else {
