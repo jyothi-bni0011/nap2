@@ -74,11 +74,12 @@
 												<?php if( $doc_category_id == 1 ): ?>
 												<div class="panel-heading">
 													<?= $documents[$doc_category_id][0]->{DOCUMENT_CATEGORY_NAME}; ?>
-													<div style="float: right;">
-														<input type="checkbox" class="form-check-input select_all" id="<?= $documents[$doc_category_id][0]->{DOCUMENT_CATEGORY_ID}; ?>">Select All
-													</div>
+													
 												</div>
 												<div class="panel-body">
+<!--                                                                                                    <div >
+														<input type="checkbox" class="form-check-input select_all" id="<?= $documents[$doc_category_id][0]->{DOCUMENT_CATEGORY_ID}; ?>">Select All
+													</div>-->
 													<?php foreach( $document as $key => $doc ):?>
 														<?php if( $doc->{DOCUMENT_ID} ): ?>
 															<div class="form-check">
