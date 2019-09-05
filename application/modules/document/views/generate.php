@@ -66,12 +66,12 @@
                                                 <?php echo $variable->field_name; endif; ?>
                                             <?php if($variable->type_id==0):?>
                                             <label for="" class="small mb-0"><?php echo $variable->field_name; ?></label>
-                                            <input type="text" name="<?php echo $varname; ?>" id="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>">
+                                            <input type="text" name="<?php echo $varname; ?>" id="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>" required="">
                                             
                                                 <?php endif; ?>
                                              <?php if($variable->type_id==2):?>
                                             <input type="hidden" name="<?php echo $varname; ?>" value="<?php echo $varname; ?>">
-                                           <input type="file" id="fileinput" name="variable_file" style="height:0;overflow:hidden;">
+                                           <input type="file" id="fileinput" name="variable_file" style="height:0;overflow:hidden;" required="">
 						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="attachment" onclick="return false;">Upload <?php echo $variable->field_name; ?></button>
 
                                             <div class="preview"></div>
