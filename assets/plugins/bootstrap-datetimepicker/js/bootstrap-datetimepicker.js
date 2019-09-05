@@ -113,8 +113,8 @@
     this.timezone = options.timezone || this.defaultTimeZone;
 
     this.icons = {
-      leftArrow: this.fontAwesome ? 'fa-arrow-left' : (this.bootcssVer === 3 ? 'glyphicon-arrow-left' : 'icon-arrow-left'),
-      rightArrow: this.fontAwesome ? 'fa-arrow-right' : (this.bootcssVer === 3 ? 'glyphicon-arrow-right' : 'icon-arrow-right')
+      leftArrow: this.fontAwesome ? 'fa-arrow-left' : (this.bootcssVer === 3 ? 'fa fa-arrow-left' : 'icon-arrow-left'),
+      rightArrow: this.fontAwesome ? 'fa-arrow-right' : (this.bootcssVer === 3 ? 'fa fa-arrow-right' : 'icon-arrow-right')
     }
     this.icontype = this.fontAwesome ? 'fa' : 'glyphicon';
 

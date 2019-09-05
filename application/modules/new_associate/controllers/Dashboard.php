@@ -33,5 +33,6 @@ class Dashboard extends MY_Controller {
 		$this->load->view('dashboard', $this->data);
 		$this->load->view('common/footer');
 	}
+        
 
 }

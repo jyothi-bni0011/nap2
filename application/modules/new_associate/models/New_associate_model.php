@@ -56,7 +56,7 @@ class New_associate_model extends MY_Model {
 			return FALSE;
 		}
 
-		$query = $this->db->select('user_document_mapping.*, document.document_title, ( SELECT role_id FROM document_form_steps WHERE document_id = user_document_mapping.document_id AND form_step = user_document_mapping.form_step) as form_step_role_id, document.document_template, document.document_type', FALSE)
+		$query = $this->db->select('user_document_mapping.*, document.document_title, ( SELECT role_id FROM document_form_steps WHERE document_id = user_document_mapping.document_id AND form_step = user_document_mapping.form_step) as form_step_role_id, document.document_template, document.document_type,(SELECT GROUP_CONCAT(type_id) FROM document_variables WHERE document_id = user_document_mapping.document_id) AS variable_types', FALSE)
 			->from('user_document_mapping')
 			->join('document', 'document.document_id = user_document_mapping.document_id', 'left')
 			->where('user_id', $associate_id )

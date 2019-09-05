@@ -157,7 +157,7 @@ class Generate extends MY_Controller {
 					$pdf_path	= dirname( APPPATH ) . $associate_document->file_url;
 				}
 
-				
+//				
 //                                print_r($posted_data);
 //                                print_r($variables);exit;
                                 $json  = json_encode($variables);
@@ -189,7 +189,7 @@ class Generate extends MY_Controller {
                                                     
 						$varname = sprintf('var_%s', str_replace(['{','}'], "", $variable->varname));
                                                 $variable_id=$variable->variable_id;
-                                                $image 		= base_url().$pdf_file . $posted_data['variable_file'];
+                                                $var_attachment =$posted_data[$varname]		= base_url().$pdf_file . $posted_data['variable_file'];
                                                 
                                                 }
 //                                                print_r($image);exit;
@@ -219,7 +219,7 @@ class Generate extends MY_Controller {
 								'document_id'		=> $document_id,
 								'variable_id'		=> $variable->variable_id,
 								'varname_value'		=> $posted_signature);
-
+//                                                        print_r($users_document_fields[$varname]);exit;        
 							$signature_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
 
 							file_put_contents($signature_path, file_get_contents($posted_signature));
@@ -228,26 +228,26 @@ class Generate extends MY_Controller {
 						
 						}
                                                 if( array_key_exists($varname, $posted_data) && $variable->type_id ==2 && isset($pdf_file)) {
-//                                                       
 							$users_document_fields[$varname] 	= array(
 								'user_id'			=> $associate_id,
 								'document_id'		=> $document_id,
 								'variable_id'		=> $variable->variable_id,
-								'varname_value'		=> $image,
+								'varname_value'		=> $var_attachment,
                                                                 );
-
-							$attachment_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
-                                                        $path=base_url().$pdf_file . $posted_data['variable_file'];
+//                                                        print_r($users_document_fields);exit;
+//							$attachment_path = dirname( APPPATH ) . $this->image_dir . $document_id . $associate_id . $varname;
+//                                                        $path=base_url().$pdf_file . $posted_data['variable_file'];
                                                         
-							file_put_contents($attachment_path, file_get_contents($path));
+//							file_put_contents($attachment_path, file_get_contents($path));
 //                                                        unlink($path);
-							echo $image 		= $this->image_dir . $document_id . $associate_id . $varname;
-							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname),'<img  class="' . $varname . ' img-responsive" src="' . base_url($image) . '" width="125" style="width:80%;"/>', $template);
+//							echo $image 		= $this->image_dir . $document_id . $associate_id . $varname;
+//							$template 	= preg_replace( sprintf('/<span class=\"%s\">.*?<\/span>/', $varname),'<img  class="' . $varname . ' img-responsive" src="' . base_url($image) . '" width="125" style="width:80%;"/>', $template);
 //						print_r($template);exit;
 						}
 //                                                echo "repalce ".$replace."<br/>";
 //                                                echo $variable->variable_id. "-" .$variable->varname."<br/>";
 					}
+//                                         print_r($users_document_fields);exit;
 //                                        exit;
 				}
 //                                echo '<pre>';
@@ -285,7 +285,7 @@ class Generate extends MY_Controller {
 					if( file_exists($image_path) ) {
 						unlink( $image_path );
 					}
-
+//                                        echo "test jyo";exit;
 					$pdf_file = $this->pdf_dir . $document->doc_folder_name . '/' . $file_name . '.pdf';
 					if( $associate_document->file_url ) {
 						$pdf_file	= $associate_document->file_url;

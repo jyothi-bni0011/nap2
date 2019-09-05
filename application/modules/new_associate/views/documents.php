@@ -68,10 +68,18 @@
 						</td>
 						<td>
 							
+                                                    <?php if( $document->status == 2 & $document->document_type == 1 || $document->status == 4 && $document->file_url ): ?>
+										<a title="Document" href="<?php echo base_url('new_associate/view/' . $document->user_id . '/' . $document->document_id); ?>" class="btn bg-danger p-2 btn-circle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                                                                <?php if($document->variable_types !=""){
+                                                                                    $var_type_arr=explode(',',$document->variable_types);
+//                                                                                    print_r($var_type_arr);
+                                                                                    if(in_array(2,$var_type_arr)){ ?>
+                                                                                   <a title="Document Attachments" href="<?php echo base_url('new_associate/docAttachments/' . $document->document_id . '/' . $document->user_id); ?>" class="btn bg-primary p-2 btn-circle"><i class="fa fa-paperclip" aria-hidden="true"></i></a>
 
-							<?php if( $document->status == 2 || $document->status == 4 && $document->file_url ): ?>
-								<a href="<?php echo base_url('new_associate/view/' . $document->user_id . '/' . $document->document_id); ?>" class="btn bg-danger p-2 btn-circle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-							<?php endif; ?>
+                                                                                   
+                                                                                 <?php } }?>
+									<?php endif; ?>
+							
 						</td>
 					</tr>
 					<?php endforeach; ?>

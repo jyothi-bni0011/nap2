@@ -45,7 +45,16 @@ class New_associate extends MY_Controller {
 		$this->load->view('common/footer');
 
 	}
-
+        public function docAttachments($document_id,$associate_id) {
+        $this->data['title'] = "Document Attchments";
+       
+            $this->data['doc_attachments'] = $this->document_update_model->get_document_values($document_id,$associate_id);
+//        print_r($this->data['doc_attachments']);exit;
+        $this->load->view('common/header');
+        $this->load->view('document_attachments', $this->data);
+        $this->load->view('common/footer');
+        }
+        
 	public function view( $associate_id, $document_id, $decline=0 )
 	{
 		

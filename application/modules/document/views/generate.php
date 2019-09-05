@@ -72,7 +72,7 @@
                                              <?php if($variable->type_id==2):?>
                                             <input type="hidden" name="<?php echo $varname; ?>" value="<?php echo $varname; ?>">
                                            <input type="file" id="fileinput" name="variable_file" style="height:0;overflow:hidden;">
-						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="attachment" onclick="return false;"><?php echo $variable->field_name; ?></button>
+						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="attachment" onclick="return false;">Upload <?php echo $variable->field_name; ?></button>
 
                                             <div class="preview"></div>
                                           
@@ -96,9 +96,9 @@
 				<?php echo $template; ?>
 			</div>
 		</div>
-	</div>
-    
-</div>
+			</div>
+                    
+		</div>
 <?php endif; ?>
 
 <div class="modal fade" id="signature_modal" tabindex="-1" role="dialog">
@@ -127,12 +127,12 @@
     
   });
 
-  $("#fileinput").change(function() {
-      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-            alert("Only formats are allowed : "+fileExtension.join(', '));
-            return false;
-        }
+  $("#fileinput_old").change(function() {
+//      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+//        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+//            alert("Only formats are allowed : "+fileExtension.join(', '));
+//            return false;
+//        }
     if (this.files && this.files[0]) {
       var reader = new FileReader();
       reader.onload = imageIsLoaded;
