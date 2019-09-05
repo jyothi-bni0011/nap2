@@ -1643,5 +1643,11 @@ if(isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT']=='contype')
 	exit;
 }
 
+if (!function_exists('set_magic_quotes_runtime')) {
+    function set_magic_quotes_runtime($new_setting) {
+        return true;
+    }
+}
+
 }
 ?>
