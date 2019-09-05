@@ -48,7 +48,7 @@
 								<td><?php echo $new_associate->{DEPARTMENT_NAME}; ?></td>
 								<td><?php echo $new_associate->{FUNCTIONAL_AREA_NAME}; ?></td>
 								<td><?php echo $new_associate->{ORGANIZATIONAL_UNIT_NAME}; ?></td>
-								<td><?php echo date("F d,Y", strtotime($new_associate->{NEW_ASSOCIATE_START_DATE})); ?></td>
+								<td><?php echo date("F d, Y", strtotime($new_associate->{NEW_ASSOCIATE_START_DATE})); ?></td>
 								
 							</tr>
                      	<?php endforeach; ?>
