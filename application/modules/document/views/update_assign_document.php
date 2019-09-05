@@ -81,10 +81,16 @@
 														<input type="checkbox" class="form-check-input select_all" id="<?= $documents[$doc_category_id][0]->{DOCUMENT_CATEGORY_ID}; ?>">Select All
 													</div>-->
 													<?php foreach( $document as $key => $doc ):?>
-														<?php if( $doc->{DOCUMENT_ID} ): ?>
+														<?php if( $doc->{DOCUMENT_ID} ):
+                                                                                                                    $check=$disable="";
+                                                                                                    $findKey=search_revisions($assigned_documents,$doc->{DOCUMENT_ID},'document_id');
+                                                                                                    $findKey=implode(',',$findKey);
+                                                                                                    if($findKey!=""){
+                                                                                                       $check="checked";$disable="disabled"; 
+                                                                                                    }?>
 															<div class="form-check">
 															  <label class="form-check-label">
-															    <input type="checkbox" class="form-check-input <?= $documents[$doc_category_id][0]->{DOCUMENT_CATEGORY_ID}; ?>" name="documents[]" value="<?= $doc->{DOCUMENT_ID} ?>" ><?= $doc->{DOCUMENT_TITLE} ?>
+															    <input type="checkbox" class="form-check-input <?= $documents[$doc_category_id][0]->{DOCUMENT_CATEGORY_ID}; ?>" name="documents[]" value="<?= $doc->{DOCUMENT_ID} ?>" <?= $check ?> <?= $disable ?>><?= $doc->{DOCUMENT_TITLE} ?>
 															  </label>
 															</div>
 														<?php else: ?>
