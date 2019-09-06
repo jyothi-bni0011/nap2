@@ -68,7 +68,7 @@
 						</td>
 						<td>
 							
-                                                    <?php if( $document->status == 2 & $document->document_type == 1 || $document->status == 4 && $document->file_url ): ?>
+                                                    <?php if( $document->status == 2 & $document->document_type == 1 || $document->status == 4 && $document->file_url || $document->status == 2 & $document->document_type == 2): ?>
 										<a title="Document" href="<?php echo base_url('new_associate/view/' . $document->user_id . '/' . $document->document_id); ?>" class="btn bg-danger p-2 btn-circle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                                                                                 <?php if($document->variable_types !=""){
                                                                                     $var_type_arr=explode(',',$document->variable_types);
