@@ -27,10 +27,11 @@
 						</thead>
 						<tbody>
 							<?php $i=1; foreach($doc_attachments as $doc_attachment): 
+//                                                            print_r($doc_attachments);exit;
                                                             if($doc_attachment->type_id==2){?>
                                                                 <tr class="odd gradeX">
 								<td><?= $i++; ?></td>
-                                                                <td><a href="<?php echo $doc_attachment->varname_value;?>"><?php echo $doc_attachment->varname;?></a></td>
+                                                                <td><a href="<?php echo $doc_attachment->varname_value;?>" target="_blank"><?php echo ucwords(sprintf(str_replace(['{','}','_'], " ", $doc_attachment->varname)))?></a></td>
 								
 							</tr>
                                                            <?php }?>
