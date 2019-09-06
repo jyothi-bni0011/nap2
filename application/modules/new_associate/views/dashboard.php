@@ -50,7 +50,7 @@
 								</td>
 								<td>
 									
-									<?php if( $associate_doc->status == 2 & $associate_doc->document_type == 1 || $associate_doc->status == 4 && $associate_doc->file_url ): ?>
+									<?php if( $associate_doc->status == 2 & $associate_doc->document_type == 1 || $associate_doc->status == 4 && $associate_doc->file_url || $associate_doc->status == 2 & $associate_doc->document_type == 2 ): ?>
 										<a title="Document" href="<?php echo base_url('new_associate/view/' . $associate_doc->user_id . '/' . $associate_doc->document_id); ?>" class="btn bg-danger p-2 btn-circle"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                                                                                 <?php if($associate_doc->variable_types !=""){
                                                                                     $var_type_arr=explode(',',$associate_doc->variable_types);
