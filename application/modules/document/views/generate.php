@@ -71,7 +71,7 @@
                                                 <?php endif; ?>
                                              <?php if($variable->type_id==2):?>
                                             <input type="hidden" name="<?php echo $varname; ?>" value="<?php echo $varname; ?>">
-                                           <input type="file" id="fileinput" name="variable_file"  required="">
+                                           <input type="file" id="fileinput" name="variable_file"  required="" style="width:196px;">
 						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="attachment" onclick="return false;" style="display:none;">Upload <?php echo $variable->field_name; ?></button>
 
                                             <div class="preview"></div>
