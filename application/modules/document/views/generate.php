@@ -63,9 +63,9 @@
                                             <?php if($variable->type_id==1):?>
                                                 <input type="radio" name="var_feild_radio" id="<?php echo $varname; ?>" class="update-changes" value="<?php echo $variable->varname; ?>" required="">
                                             
-                                                <?php echo $variable->field_name; endif; ?>
+                                                <?php echo ucwords($variable->field_name); endif; ?>
                                             <?php if($variable->type_id==0):?>
-                                                <label for="" class="small mb-0"><?php echo $variable->field_name; ?></label><span class="text-danger">*</span>
+                                                <label for="" class="small mb-0"><?php echo ucwords($variable->field_name); ?></label><span class="text-danger">*</span>
                                             <input type="text" name="<?php echo $varname; ?>" id="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>" required="">
                                             
                                                 <?php endif; ?>
