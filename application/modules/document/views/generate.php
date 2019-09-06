@@ -50,7 +50,7 @@
 		<form class="card card-primary border-0" method="POST" enctype="multipart/form-data" action="<?php echo current_url(); ?>" autocomplete="off">
 		<?php endif; ?>
 			<input type="hidden" name="document_id" value="<?php echo $document->document_id; ?>">
-			<div class="card-header bg-danger"><span class="card-title">Available variables</span></div>
+                        <div class="card-header bg-secondary text-white"><span class="card-title">Available Variables</span></div>
 			<div class="card-body generate-variable pl-3 pr-3 pt-3 pb-0">
 				<?php if( ! empty($variables) ): foreach ($variables as $variable): ?>
 				<?php $varname = "var_" . str_replace(['{','}'], "", $variable->varname); ?>
@@ -71,8 +71,8 @@
                                                 <?php endif; ?>
                                              <?php if($variable->type_id==2):?>
                                             <input type="hidden" name="<?php echo $varname; ?>" value="<?php echo $varname; ?>">
-                                           <input type="file" id="fileinput" name="variable_file" style="height:0;overflow:hidden;" required="">
-						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="attachment" onclick="return false;">Upload <?php echo $variable->field_name; ?></button>
+                                           <input type="file" id="fileinput" name="variable_file"  required="">
+						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="attachment" onclick="return false;" style="display:none;">Upload <?php echo $variable->field_name; ?></button>
 
                                             <div class="preview"></div>
                                           
