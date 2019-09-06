@@ -65,7 +65,7 @@
                                             
                                                 <?php echo $variable->field_name; endif; ?>
                                             <?php if($variable->type_id==0):?>
-                                            <label for="" class="small mb-0"><?php echo $variable->field_name; ?></label>
+                                                <label for="" class="small mb-0"><?php echo $variable->field_name; ?></label><span class="text-danger">*</span>
                                             <input type="text" name="<?php echo $varname; ?>" id="<?php echo $varname; ?>" class="form-control update-changes" value="<?php echo set_value($varname); ?>" required="">
                                             
                                                 <?php endif; ?>
@@ -84,7 +84,11 @@
 				<a href="#" class="no-variable border-0 list-group-item list-group-item-action">Read and Review –  No signature is required.</a>
 				<?php endif; ?>
 			</div>
-			<button class="btn bg-danger btn-block" type="submit">Create Document</button>
+                        <?php if( ! empty($variables) ):?>
+			<button class="btn bg-success btn-block" type="submit">Save & Send</button>
+                        <?php else:?>
+                        <button class="btn bg-success btn-block" type="submit">Acknowledge</button>
+                        <?php endif; ?>
 		</form>
                                   
 	</div>
