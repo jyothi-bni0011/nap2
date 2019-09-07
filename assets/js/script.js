@@ -64,7 +64,7 @@ $(document).ready(function(){
                         
                         if(model_type == "system"){
                            type_name="sign";
-                           type_id="3";
+                           type_id="0";
                         }
 			input_hidden 	= 
 				'<input type="hidden" name="variables[' + key + '][field_name]" value="' + field_name + '">' +

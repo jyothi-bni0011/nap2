@@ -158,13 +158,13 @@
                                                                         <?php if($variable->type_id==1){ ?>
                                                                             <span class="badge badge-danger badge-pill"><?php echo "Radio"; ?></span>
                                                                         <?php }?>
-                                                                        <?php if($variable->type_id==0){ ?>
+                                                                        <?php if($variable->type_id==0 && strpos($variable->varname, 'signature') != true){ ?>
                                                                         <span class="badge badge-danger badge-pill"><?php echo "Text"; ?></span>
                                                                         <?php }?>
                                                                          <?php if($variable->type_id==2){ ?>
                                                                         <span class="badge badge-danger badge-pill"><?php echo "File"; ?></span>
                                                                         <?php }?>
-                                                                         <?php if($variable->type_id==3){ ?>
+                                                                         <?php if (strpos($variable->varname, 'signature') !== false){ ?>
                                                                         <span class="badge badge-danger badge-pill"><?php echo "Sign"; ?></span>
                                                                         <?php }?>
                                                                         
