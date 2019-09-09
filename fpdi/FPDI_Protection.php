@@ -30,7 +30,7 @@ class FPDI_Protection extends FPDI {
     var $last_rc4_key_c;     //last RC4 computed key
     var $padding = '';
     
-    function FPDI_Protection($orientation='P',$unit='mm',$format='A4')
+    function FPDI_Protection_old($orientation='P',$unit='mm',$format='A4')
     {
         parent::FPDI($orientation,$unit,$format);
         $this->_current_obj_id =& $this->current_obj_id; // for FPDI 1.1 compatibility
@@ -40,7 +40,17 @@ class FPDI_Protection extends FPDI {
         $this->padding = "\x28\xBF\x4E\x5E\x4E\x75\x8A\x41\x64\x00\x4E\x56\xFF\xFA\x01\x08".
                          "\x2E\x2E\x00\xB6\xD0\x68\x3E\x80\x2F\x0C\xA9\xFE\x64\x53\x69\x7A";
     }
-
+    function __construct($orientation='P',$unit='mm',$format='A4') {
+        // Construct the parent class
+        parent::__construct();
+        parent::FPDI($orientation,$unit,$format);
+        $this->_current_obj_id =& $this->current_obj_id; // for FPDI 1.1 compatibility
+        
+        $this->encrypted=false;
+        $this->last_rc4_key = '';
+        $this->padding = "\x28\xBF\x4E\x5E\x4E\x75\x8A\x41\x64\x00\x4E\x56\xFF\xFA\x01\x08".
+                         "\x2E\x2E\x00\xB6\xD0\x68\x3E\x80\x2F\x0C\xA9\xFE\x64\x53\x69\x7A";
+    }
     /**
     * Function to set permissions as well as user and owner passwords
     *

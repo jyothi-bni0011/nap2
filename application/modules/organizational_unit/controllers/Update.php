@@ -16,7 +16,7 @@ class Update extends MY_Controller {
 	public function index($slag="")
 	{
 
-		$data['title'] = "Organizational Unit";
+		$data['title'] = "Update Organizational Unit";
 
 		if( count($_POST) ) {
 			$this->form_validation->set_rules('org_unit_name', 'Organizational Unit', 'trim|required|max_length[49]');

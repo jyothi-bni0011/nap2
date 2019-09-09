@@ -89,7 +89,7 @@
 						      <input type="checkbox" id="is_password" aria-label="form-control input-height" name="pass_check" <?php if( $document->document_password != null ) echo "checked"; ?> >
 						    </div>
 						  </div>
-						  <input type="password" name="doc_password" class="form-control input-height" aria-label="Text input with checkbox" id="pass_text" <?php if( $document->document_password != null ) { echo 'value = "'. $this->encrypt->decode($document->document_password) .'"'; } else { echo "disabled"; } ?> >
+                                                    <input type="password" name="doc_password" class="form-control input-height" aria-label="Text input with checkbox" id="pass_text" <?php if( $document->document_password != null ) { echo 'value = "'. $this->encrypt->decode($document->document_password) .'"'; } ?> disabled="">
 						  <span toggle="#pass_text" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
 						</div>
 					</div>
@@ -333,7 +333,8 @@ $(document).ready(function(){
 	
 	$('#is_password').on('click',function(){
 		if($("#is_password").prop('checked') == true){
-		    $('#pass_text').removeAttr('disabled');
+                    $('#pass_text').val('Leica@123');
+//		    $('#pass_text').removeAttr('disabled');
 		    //$("#pass_text").rules("add", "required");
 		}
 		else{

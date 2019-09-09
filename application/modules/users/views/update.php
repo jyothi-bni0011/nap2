@@ -45,7 +45,7 @@
 								<span class="required"> * </span>
 							</label>
 							<div class="col-md-5">
-								<input type="text" name="user_name" data-required="1" placeholder="Enter Username" class="form-control input-height" value="<?php echo $user_name; ?>" data-msg-required="Username is required.">
+                                                            <input type="text" name="user_name" data-required="1" placeholder="Enter Username" class="form-control input-height" value="<?php echo $user_name; ?>" data-msg-required="Username is required." readonly="">
 							</div>
 						</div>
 
@@ -74,7 +74,7 @@
 								<span class="required"> * </span>
 							</label>
 							<div class="col-md-5">
-								<input type="text" name="user_email" data-required="1" placeholder="Enter Email ID" class="form-control input-height" value="<?php echo $email_id; ?>" data-msg-required="Email is required.">
+                                                            <input type="text" name="user_email" data-required="1" placeholder="Enter Email ID" class="form-control input-height" value="<?php echo $email_id; ?>" data-msg-required="Email is required." readonly="">
 							</div>
 						</div>
 

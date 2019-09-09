@@ -14,7 +14,7 @@ class Create extends MY_Controller {
 	public function index()
 	{
 
-		$data['title'] = "Document Folder";
+		$data['title'] = "Create Document Folder";
 
 		if( count($_POST) ) {
 			

@@ -2,12 +2,12 @@
 <div class="page-bar">
   <div class="page-title-breadcrumb">
     <div class=" pull-left">
-      <div class="page-title">New Associate</div>
+      <div class="page-title">Update New Associate</div>
     </div>
     <ol class="breadcrumb page-breadcrumb pull-right">
       <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="<?php echo base_url( 'dashboard' ); ?>">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
       </li>
-      <li class="active">New Associate</li>
+      <li class="active">Update New Associate</li>
     </ol>
   </div>
 </div>
@@ -25,7 +25,7 @@
                                      <span class="required"> * </span>
                               </label>
                               <div class="col-md-5">
-                                   <input type="text" id="username" name="username" data-required="1" placeholder="Enter Username" class="form-control input-height check_unique" value="<?php echo $username; ?>" data-msg-required="Username is required."/> </div>
+                                  <input type="text" id="username" name="username" data-required="1" placeholder="Enter Username" class="form-control input-height check_unique" value="<?php echo $username; ?>" data-msg-required="Username is required."  readonly=""/> </div>
 								   <span id="username_error" class="error" style="padding: 10px;display: none; color: red;">This Username is already exist.</span>
                          </div>
                          <div class="form-group row">
@@ -33,7 +33,7 @@
                                      <span class="required"> * </span>
                               </label>
                            <div class="col-md-5">
-                                <input type="text" id="email" name="email" data-required="1" placeholder="Enter Email ID" class="form-control input-height check_unique" value="<?php echo $email; ?>" data-msg-required="Email is required."/> 
+                                <input type="text" id="email" name="email" data-required="1" placeholder="Enter Email ID" class="form-control input-height check_unique" value="<?php echo $email; ?>" data-msg-required="Email is required." readonly=""/> 
                            </div>
 						   <span id="email_error" class="error" style="padding: 10px;display: none; color: red;">This Email is already exist.</span>
                          </div>

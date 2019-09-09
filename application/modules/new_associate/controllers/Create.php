@@ -19,7 +19,7 @@ class Create extends MY_Controller {
 			$data = $_POST;
 		}
 		
-		$data['title'] = "New Associate";
+		$data['title'] = "Create New Associate";
 
 		if( count($_POST) AND ! array_key_exists("user_id",$_POST) ) 
 		{

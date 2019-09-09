@@ -142,9 +142,11 @@
 		    	
 		if (album_text.length === 0) {
 		    //console.log('field is empty');
-		    $( "#user_role-error_custome" ).show();
-		    $( "#user_role-error_custome" ).text('Please select at least 1 document.');
-		    e.preventDefault();
+                    alert('Please select at least 1 document.');
+                    return false;
+//		    $( "#user_role-error_custome" ).show();
+//		    $( "#user_role-error_custome" ).text('Please select at least 1 document.');
+//		    e.preventDefault();
 		}
 	});
 	

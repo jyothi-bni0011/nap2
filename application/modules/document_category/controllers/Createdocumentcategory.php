@@ -14,7 +14,7 @@ class Createdocumentcategory extends MY_Controller {
 	public function index()
 	{
 
-		$data['title'] = "Document Category";
+		$data['title'] = "Create Document Category";
 
 		if( count($_POST) ) {
 			

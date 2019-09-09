@@ -16,7 +16,7 @@ class Updatedocumentcategory extends MY_Controller {
 	public function index($slag="")
 	{
 
-		$data['title'] = "Document Category";
+		$data['title'] = "Update Document Category";
 
 		if( count($_POST) ) {
 			$this->form_validation->set_rules('doc_category', 'Document Category', 'trim|required|max_length[49]');

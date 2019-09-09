@@ -16,7 +16,7 @@ class Update extends MY_Controller {
 	public function index($slag="")
 	{
 
-		$data['title'] = "Roles";
+		$data['title'] = "Update Roles";
 
 		if( count($_POST) ) {
 			$this->form_validation->set_rules('role_name', 'Role Name', 'trim|required|max_length[49]');

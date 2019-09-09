@@ -16,7 +16,7 @@ class Update extends MY_Controller {
 	public function index($slag="")
 	{
 
-		$data['title'] = "Document Folder";
+		$data['title'] = "Update Document Folder";
 
 		if( count($_POST) ) {
 			$this->form_validation->set_rules('folder_name', 'Document Folder', 'trim|required|max_length[49]');

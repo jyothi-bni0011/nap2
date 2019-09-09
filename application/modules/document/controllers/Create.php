@@ -13,7 +13,7 @@ class Create extends MY_Controller {
 
 	public function index() 
 	{
-		$data['title'] = "Document";
+		$data['title'] = "Create Document";
 		if( count($_POST) ) {
 			//upload doc
 			if ( $this->input->post('doc_type') == 'upload' ) 

@@ -16,7 +16,7 @@ class Create extends MY_Controller {
 	public function index()
 	{
 
-		$data['title'] = "Organizational Unit";
+		$data['title'] = "Create Organizational Unit";
 
 		if( count($_POST) ) {
 			

@@ -33,9 +33,9 @@ class Forgot_password extends MY_Controller {
 						if ( $this->forgot_password_model->send_email( 'forgot_password',$this->input->post('username'), $values ) ) //$this->input->post('username')
 						{
 							$this->forgot_password_model->update_password( $newpass, $values->email );
-
-							redirect( base_url('login') );
-							exit;
+                                                        $this->data['message'] = "Email sent succesfully, please login with updated credentials.";
+//							redirect( base_url('login') );
+//							exit;
 						}
 						$this->data['message'] = "Email can not be send.";	
 					}

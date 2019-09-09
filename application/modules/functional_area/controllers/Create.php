@@ -16,7 +16,7 @@ class Create extends MY_Controller {
 	public function index()
 	{
 
-		$data['title'] = "Functional Area";
+		$data['title'] = "Create Functional Area";
 
 		if( count($_POST) ) {
 			

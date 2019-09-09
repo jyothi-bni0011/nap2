@@ -16,7 +16,7 @@ class Updatedepartment extends MY_Controller {
 	public function index($slag="")
 	{
 
-		$data['title'] = "Department";
+		$data['title'] = "Update Department";
 
 		if( count($_POST) ) {
 			$this->form_validation->set_rules('department_name', 'Department', 'trim|required|max_length[49]');

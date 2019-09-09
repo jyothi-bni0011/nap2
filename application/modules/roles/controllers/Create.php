@@ -16,7 +16,7 @@ class Create extends MY_Controller {
 	public function index()
 	{
 
-		$data['title'] = "Roles";
+		$data['title'] = "Create Role";
 
 		if( count($_POST) ) {
 			

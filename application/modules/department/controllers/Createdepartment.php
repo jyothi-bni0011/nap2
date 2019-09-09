@@ -16,7 +16,7 @@ class Createdepartment extends MY_Controller {
 	public function index()
 	{
 
-		$data['title'] = "Department";
+		$data['title'] = "Create Department";
 
 		if( count($_POST) ) {
 			

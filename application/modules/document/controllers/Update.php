@@ -16,7 +16,7 @@ class Update extends MY_Controller {
 	public function index( $document_id )
 	{
             
-		$this->data['title'] = "Document";
+		$this->data['title'] = "Create Document";
 		if( count($_POST) ) 
 		{ 
 			//upload doc
