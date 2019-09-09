@@ -15,8 +15,13 @@
 				$url = base_url('assets/uploaded_documents/' . $document->document_template );
 			}
 		?>
-		Please download the document <a href="<?= $url; ?>" data-toggle="tooltip" title="Download" download><?= $document->document_title; ?></a> for editing. After editing upload it.
-		<br>
+<!--		Please download the document <a href="<?= $url; ?>" data-toggle="tooltip" title="Download" download><?= $document->document_title; ?></a> for editing. After editing upload it.-->
+            <div><h4>Please go through with below instructions.</h4>
+                <ul><li>Download the document “<?= $document->document_title; ?>” by clicking “Download PDF”.</li>
+<li>Print the document.</li>
+<li>Once the document is completed -  scan and save the document to your computer as a pdf file.</li>
+<li>Click on “Upload PDF” and find the saved document.</li></ul></div>	
+            
 		<a href="<?= $url; ?>" class="btn bg-success p-2 btn-circle" data-toggle="tooltip" title="Download" download><i class="fa fa-download" aria-hidden="true"></i> &nbsp; Download PDF</a>
 
 		&nbsp; &nbsp; &nbsp; 
@@ -32,6 +37,7 @@
 					<input type="hidden" name="from" value="1">
 				<?php endif; ?>
 			</form>
+                        
 		<?php else: ?>
 			<span style="font-size: smaller;" ><i>Document Already Uploaded<i/></span>
 		<?php endif; ?>
