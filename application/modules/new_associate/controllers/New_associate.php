@@ -103,9 +103,9 @@ class New_associate extends MY_Controller {
 						];
 						$values = (object) array_merge( (array)$values, $comment );						
 
-//						if ( $this->document_update_model->send_email( 'rejected_document', $values->email, $values ) ) {
-//							
-//						}
+						if ( $this->document_update_model->send_email( 'rejected_document', $values->email, $values ) ) {
+							
+						}
 						$this->session->set_flashdata('message', '<div class="alert alert-success">The document has been declined.</div>');
 						redirect('/dashboard');
 						exit;
