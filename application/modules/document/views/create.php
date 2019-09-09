@@ -272,7 +272,8 @@ $(document).ready(function(){
 	
 	$('#is_password').on('click',function(){
 		if($("#is_password").prop('checked') == true){
-		    $('#pass_text').removeAttr('disabled');
+                    $('#pass_text').val('Leica@123');
+//		    $('#pass_text').removeAttr('disabled');
 		    //$("#pass_text").rules("add", "required");
 		}
 		else{

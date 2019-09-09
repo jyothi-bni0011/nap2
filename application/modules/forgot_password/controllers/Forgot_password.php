@@ -36,8 +36,10 @@ class Forgot_password extends MY_Controller {
                                                         $this->data['message'] = "Email sent succesfully, please login with updated credentials.";
 //							redirect( base_url('login') );
 //							exit;
-						}
-						$this->data['message'] = "Email can not be send.";	
+                                                }else{
+                                                    $this->data['message'] = "Email can not be send.";
+                                                }
+							
 					}
 					else {
 						$this->data['message'] = "Unable to authenticate user. Please try again after sometime.";
