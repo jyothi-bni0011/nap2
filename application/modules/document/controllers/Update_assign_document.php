@@ -17,8 +17,11 @@ class Update_assign_document extends MY_Controller {
         $data['title'] = "Assign Document To New Associate";
 
         if (count($_POST) && $associate_id != "") {
+            $values = $this->create_model->get_data_for_new_associate( $this->input->post('email') );
 
+	   
             $url = ['welcome_url' => anchor(base_url(), base_url())];
+            $values = (object) array_merge( (array)$values, $url );
             if (array_key_exists('documents', $_POST)) {
                 /* Insert document mapping for new associate */
                 if ($this->assign_document_model->update($this->input->post('documents'), $associate_id)) {
