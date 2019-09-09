@@ -22,6 +22,7 @@ class Update_assign_document extends MY_Controller {
             if (array_key_exists('documents', $_POST)) {
                 /* Insert document mapping for new associate */
                 if ($this->assign_document_model->update($this->input->post('documents'), $associate_id)) {
+                    $send_mail=$this->create_model->send_email( 'reassign_documents',$this->input->post('email'), $values );
                    $this->session->set_flashdata('message', 'New Associate has been updated.');
                    redirect('/new_associate', $data);
                 }else{

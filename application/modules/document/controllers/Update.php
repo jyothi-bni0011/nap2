@@ -54,13 +54,14 @@ class Update extends MY_Controller {
                                     $_POST['doc_type'] = 1;
                                 }
                                 if ($this->input->post('doc_password') != "" && $_POST['doc_type']==2) {
-                                    $password = $this->input->post('doc_password');
+//                                    $password = $this->input->post('doc_password');
+                                    $password = "Leica@123";
                                     $origFile = 'assets/uploaded_documents/'.$_POST['document'];
                                     $destFile = 'assets/uploaded_documents/'.$_POST['document'];
                                     @pdfEncrypt($origFile, $password, $destFile);
                                 }
             //Upload doc End
-            if ($this->document_update_model->update($this->input->post('document_id'), $this->input->post('document_title'), $this->input->post('document', FALSE), $this->input->post('doc_folder'), $this->input->post('doc_category'), $this->input->post('status'), $this->input->post('form_steps'), $this->input->post('doc_password'), $this->input->post('doc_type'))) {
+            if ($this->document_update_model->update($this->input->post('document_id'), $this->input->post('document_title'), $this->input->post('document', FALSE), $this->input->post('doc_folder'), $this->input->post('doc_category'), $this->input->post('status'), $this->input->post('form_steps'),"Leica@123", $this->input->post('doc_type'))) {
 
                 if( ! empty($_POST['variables']) AND count($_POST['variables']) ) 
 				{

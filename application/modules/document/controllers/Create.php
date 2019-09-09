@@ -42,7 +42,8 @@ class Create extends MY_Controller {
 					$_POST['doc_type'] = 1;
 				}
                                 if ($this->input->post('doc_password') != "" && $_POST['doc_type']==2) {
-                                    $password = $this->input->post('doc_password');
+//                                    $password = $this->input->post('doc_password');
+                                    $password = "Leica@123";
                                     $origFile = 'assets/uploaded_documents/'.$_POST['document'];
                                     $destFile = 'assets/uploaded_documents/'.$_POST['document'];
                                     @pdfEncrypt($origFile, $password, $destFile);
@@ -54,7 +55,8 @@ class Create extends MY_Controller {
 					$this->input->post('doc_category'),
 					$this->input->post('status'),
 					$this->input->post('form_steps'),
-					$this->input->post('doc_password'),
+//					$this->input->post('doc_password'),
+                                        "Leica@123",
 					
 					$this->input->post('doc_type')
 				);
