@@ -57,6 +57,9 @@ class New_associate extends MY_Controller {
         
 	public function view( $associate_id, $document_id, $decline=0 )
 	{
+            $adminsdata=$this->document_update_model->adminUsers();
+            
+            
 		
 		if( empty($associate_id) 
 			|| empty($document_id) 
@@ -140,10 +143,10 @@ class New_associate extends MY_Controller {
 						}
 						
 						//email send to admin
-						if ( $this->document_update_model->send_email( 'status_change_from_hr_to_verify_to_hr_verified', $values->email, $values ) )//for email address use $value->email variable
-						{
-							
-						}
+                                                foreach($adminsdata as $admin){
+                                                    $this->document_update_model->send_email( 'status_change_from_hr_to_verify_to_hr_verified', $admin->email_id, $values );
+                                                }
+						
 						
 					}
 					$this->session->set_flashdata('message', '<div class="alert alert-success">The document has been verified.</div>');

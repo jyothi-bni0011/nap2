@@ -16,7 +16,7 @@ class Update extends MY_Controller {
 	public function index($slag="")
 	{
 
-		$data['title'] = "Create Functional Area";
+		$data['title'] = "Update Functional Area";
 
 		if( count($_POST) ) {
 			$this->form_validation->set_rules('fun_area_name', 'Functional Area', 'trim|required|max_length[49]');

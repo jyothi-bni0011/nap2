@@ -409,6 +409,8 @@ class Generate extends MY_Controller {
 
 	public function upload_by_new_associate()
 	{
+                $adminsdata=$this->document_update_model->adminUsers(); 
+                
 		$document_id = $_POST['doc_id'];
 		$associate_id = $_POST['associate_id'];
 		//if ( ! $associate_id ) {
@@ -493,7 +495,12 @@ class Generate extends MY_Controller {
 					$asso_doc_info = (object)array_merge( (array)$associate_info, $document_list_name );
 					
 					$this->document_update_model->send_email( 'status_change_from_hr_email_sent_to_hr_to_verify', $associate_info->email, $asso_doc_info );
-					break;
+					
+                                        foreach($adminsdata as $admin){
+                                        $this->document_update_model->send_email( 'status_change_from_hr_email_sent_to_hr_to_verify', $admin->email_id, $asso_doc_info );
+                                        }
+                                        
+                                        break;
 			}
 			//Notification email to HR Admin when status is change end here
 			//

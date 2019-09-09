@@ -26,6 +26,6 @@ class Users_model extends CI_Model {
 		return $query->result();
 		//echo "<pre>";
 		//print_r($query->result()); exit();
-	}	
-
+	}
+        
 }
