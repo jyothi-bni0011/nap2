@@ -148,7 +148,7 @@
 							</ul>
 						</div>
 						<div class="card card-primary border-0">
-							<div class="card-header bg-danger"><span class="card-title">Available variables</span></div>
+							<div class="card-header bg-danger"><span class="card-title">User defined variables</span></div>
 							<ul class="list-group" id="available-variable">
                                                             
 								<?php if( ! empty($variables) ): foreach ($variables as $variable): ?>

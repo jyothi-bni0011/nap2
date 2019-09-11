@@ -46,7 +46,14 @@
 								<input type="password" name="confirm_password" data-required="1" placeholder="Confirm password" class="form-control input-height" data-msg-equalTo="Password don't match. Please try again.">
 							</div>
 						</div>
-
+                                                <div class="form-group row">
+							<label class="control-label col-md-3">
+							</label>
+							<div class="col-md-5">
+                                                            <p style="font-size:11px;color:#A4A891;">Password Policy: We recommend to set strong password at least 8 characters long contains one Letter in Caps, one Symbol and one Number.</p>
+							</div>
+						</div>
+                                            
 						<div class="form-actions">
 							<div class="row">
 								<div class="offset-md-3 col-md-9">

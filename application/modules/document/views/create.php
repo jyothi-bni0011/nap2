@@ -142,7 +142,7 @@
 							</ul>
 						</div>
 						<div class="card card-primary border-0">
-							<div class="card-header bg-danger"><span class="card-title">Available variables</span></div>
+							<div class="card-header bg-danger"><span class="card-title">User defined variables</span></div>
 							<ul class="list-group border-0" id="available-variable">
 								<a href="#" class="no-variable border-0 list-group-item list-group-item-action">No variables are assigned for this document.</a>
 								<a href="#" id="var_create" class="list-group-item list-group-item-action border-0">Create / Manage Variables</a>

@@ -25,7 +25,7 @@ $(document).ready(function(){
 	$(document).on('click', '#var_create', function(event) {
 		event.preventDefault();
                 $('.feild_radio').show();
-                $('#var_create_modal').find('.modal-title').text('Available Variables');
+                $('#var_create_modal').find('.modal-title').text('User defined Variables');
 		$('#var_create_modal').modal("show");
 	});
 
