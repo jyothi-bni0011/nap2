@@ -332,13 +332,14 @@ $(document).ready(function(){
 	});
 	
 	$('#is_password').on('click',function(){
+//            $('#pass_text').val('');
 		if($("#is_password").prop('checked') == true){
-                    $('#pass_text').val('Leica@123');
+                    $('#pass_text').attr('value', 'Leica@123');
 //		    $('#pass_text').removeAttr('disabled');
 		    //$("#pass_text").rules("add", "required");
 		}
 		else{
-			$('#pass_text').val('');
+			$('#pass_text').attr('value', '');
 			$('#pass_text').attr('disabled',true);
 		}
 	});
