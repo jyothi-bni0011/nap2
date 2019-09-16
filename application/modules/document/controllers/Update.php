@@ -61,6 +61,9 @@ class Update extends MY_Controller {
                                     $destFile = 'assets/uploaded_documents/'.$_POST['document'];
                                     @pdfEncrypt($origFile, $password, $destFile);
                                 }
+                                if($this->input->post('pass_check') != "" && $_POST['doc_type']==1){
+                                    $password = "Leica@123";
+                                }
             //Upload doc End
             if ($this->document_update_model->update($this->input->post('document_id'), $this->input->post('document_title'), $this->input->post('document', FALSE), $this->input->post('doc_folder'), $this->input->post('doc_category'), $this->input->post('status'), $this->input->post('form_steps'),$password, $this->input->post('doc_type'))) {
 
