@@ -18,7 +18,7 @@ class Create extends MY_Controller {
 			//upload doc
 			if ( $this->input->post('doc_type') == 'upload' ) 
 			{
-					
+				$password="";
 				$full_path = $this->document_create_model->do_upload('upload_file','./assets/uploaded_documents/');
 				$_POST['document'] = $full_path;
 
@@ -41,7 +41,7 @@ class Create extends MY_Controller {
 				else{
 					$_POST['doc_type'] = 1;
 				}
-                                if ($this->input->post('doc_password') != "" && $_POST['doc_type']==2) {
+                                if ($this->input->post('pass_check') != "" && $_POST['doc_type']==2) {
 //                                    $password = $this->input->post('doc_password');
                                     $password = "Leica@123";
                                     $origFile = 'assets/uploaded_documents/'.$_POST['document'];
@@ -56,7 +56,7 @@ class Create extends MY_Controller {
 					$this->input->post('status'),
 					$this->input->post('form_steps'),
 //					$this->input->post('doc_password'),
-                                        "Leica@123",
+                                        $password,
 					
 					$this->input->post('doc_type')
 				);
