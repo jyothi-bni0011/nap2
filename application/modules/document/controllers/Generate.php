@@ -270,7 +270,7 @@ class Generate extends MY_Controller {
 					$pdf->SetHeaderMargin(30);
 					$pdf->SetTopMargin(20);
 					$pdf->setFooterMargin(20);
-					$pdf->SetAutoPageBreak(true);
+					$pdf->SetAutoPageBreak(true,20);
 					$pdf->SetAuthor('Author');
 					$pdf->SetDisplayMode('real', 'default');
 					$pdf->AddPage();
