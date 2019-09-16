@@ -64,7 +64,8 @@
 					<?php if ( array_key_exists($varname, $signature_variables) ): ?>
 						<input type="hidden" name="<?php echo $varname; ?>" > 
 
-						<button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="signature" onclick="return false;"><?php echo $variable->field_name; ?></button>
+                                                <button name="<?php echo $varname; ?>" class="<?php echo $varname; ?>" id="signature" onclick="return false;"><?php echo $variable->field_name; ?></button>
+                                                <p style="color: red;font-size: 12px;line-height: 18px;margin-top: 4px;">( Proceed with signature to avoid Rejections )</p>
 					<?php else: ?>
                                             <?php if($variable->type_id==1):?>
                                                 <input type="radio" name="var_feild_radio" id="<?php echo $varname; ?>" class="update-changes" value="<?php echo $variable->varname; ?>" required="">
