@@ -13,6 +13,7 @@ $config['email_config_old'] = array(
 	'mailtype' 		=> 'html',
 	// 'newline' 		=> "\r\n"
 );	
+//Added by jyothi on 16-07-2019
 $config['email_config'] = array(
 	'protocol' 		=> 'smtp',
 	'smtp_host' 	=> 'smtp.danahermail.com',
