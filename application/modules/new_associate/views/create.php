@@ -339,19 +339,19 @@
   
     $('.check_unique').on('blur',function(){
 
-      var table = 'new_associate';
+      var table = 'users';
       var id = $(this).attr('id');
       var column, value;
 
       switch (id) {
 
           case "username":
-              column  = 'associate_username';
+              column  = 'username';
               value   = $(this).val();
               break;
 
           case "email":
-              column  = 'associate_email';
+              column  = 'email_id';
               value   = $(this).val();
               break;
 
