@@ -41,7 +41,7 @@
 
 					<div class="col-md-9">
 						<textarea name="body" name="" id="body" cols="30" rows="10">
-							<?php echo $template->template_body; ?>
+                                                            <?php echo $template->template_body; ?>
 						</textarea>
 						<span id="body-error" style="display: none; color: red;">This field is required.</span>
 					</div>
