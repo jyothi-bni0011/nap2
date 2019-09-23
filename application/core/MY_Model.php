@@ -69,7 +69,7 @@ class MY_Model extends CI_Model {
 			foreach ($data as $key => $value) {
 				$email_body = str_replace("{" .$key . "}", $value, $email_body);
 			}
-			
+			print_r($email_body);exit;
 			$this->email->message( $email_body );
 			if($this->email->send())
 			{
@@ -92,8 +92,8 @@ class MY_Model extends CI_Model {
 	
 	public function get_data_for_new_associate( $email_id='', $id=0 )
 	{
-		$this->db->select('new_associate.associate_username as user_name, new_associate.associate_email as email, new_associate.associate_first_name as first_name, new_associate.associate_middle_name as middle_name, new_associate.associate_last_name as last_name,new_associate.associate_start_date as start_date ,job_position.position_code as job_title, organizational_unit.org_unit_name as organizational_unit, functional_area.fun_area_name as functional_area, department.department_name as department, associate_manager_name as manager_name, associate_manager_title as manager_title')
-			->from( NEW_ASSOCIATE )
+                    $this->db->select("new_associate.associate_username as user_name, new_associate.associate_email as email, new_associate.associate_first_name as first_name, new_associate.associate_middle_name as middle_name, new_associate.associate_last_name as last_name,DATE_FORMAT(new_associate.associate_start_date, '%M %d,%Y') as start_date ,job_position.position_code as job_title, organizational_unit.org_unit_name as organizational_unit, functional_area.fun_area_name as functional_area, department.department_name as department, associate_manager_name as manager_name, associate_manager_title as manager_title")			
+                        ->from( NEW_ASSOCIATE )
 			->join( JOB_POSITION, 'job_position.position_id = new_associate.position_id', 'left' )
 			->join( ORGANIZATIONAL_UNIT, 'organizational_unit.org_unit_id = new_associate.org_unit_id', 'left' )
 			->join( FUNCTIONAL_AREA, 'functional_area.fun_area_id = new_associate.fun_area_id', 'left' )
