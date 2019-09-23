@@ -59,8 +59,8 @@ class MY_Model extends CI_Model {
 			// $msg = $this->load->view( 'forgot.php', $data, true );
 			$this->load->library('email', config_item('email_config'));
 			$this->email->set_newline("\r\n");
-			$this->email->from('nap.support@bluenettech.com'); // change it to yours
-			$this->email->to( $to );// change it to yours rahul.deo@talentserv.co.in
+			$this->email->from('Lansweeper@leicabiosystems.com'); // change it to yours
+			$this->email->to( $to );// change it to yours 
 			$this->email->subject( $email_template->{EMAIL_TEMPLATE_SUBJECT} );
 
 			// $data['first_name'] = "Rahul Deo";
@@ -69,7 +69,7 @@ class MY_Model extends CI_Model {
 			foreach ($data as $key => $value) {
 				$email_body = str_replace("{" .$key . "}", $value, $email_body);
 			}
-			print_r($email_body);exit;
+                        
 			$this->email->message( $email_body );
 			if($this->email->send())
 			{
